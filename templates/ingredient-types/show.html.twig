@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Ver tipo de ingrediente
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a class="btn btn-primary" href="{{ route('ingredient-types.edit',{'id': type.id}) }}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a class="btn btn-danger" href="{{ route('ingredient-types.delete',{'id': type.id}) }}">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">id</th>
+                                        <td>{{ type.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Nome</th>
+                                        <td scope="row">{{ type.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
