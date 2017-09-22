@@ -9,6 +9,7 @@ class IngredientType extends Model
 
     // Mass Assignment
     protected $fillable = [
+        'id',
         'name',
     ];
 

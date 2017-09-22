@@ -7,7 +7,7 @@ namespace Cardapium\Repository;
 interface RepositoryInterface
 {
 
-    public function all(): array;
+    public function all();
 
     public function find(int $id, bool $failIfNotExist = true);
 

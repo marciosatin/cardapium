@@ -4,6 +4,7 @@ declare(strict_types = 1);
 
 namespace Cardapium\Plugins;
 
+use Cardapium\Models\Ingredient;
 use Cardapium\Models\IngredientType;
 use Cardapium\Models\User;
 use Cardapium\Repository\RepositoryFactory;
@@ -24,6 +25,9 @@ class DbPlugin implements PluginInterface
         $container->add('repository.factory', new RepositoryFactory());
         $container->addLazy('user.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(User::class);
+        });
+        $container->addLazy('ingredient.repository', function (ContainerInterface $container) {
+            return $container->get('repository.factory')->factory(Ingredient::class);
         });
         $container->addLazy('ingredient-type.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(IngredientType::class);

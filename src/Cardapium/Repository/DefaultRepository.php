@@ -25,9 +25,9 @@ class DefaultRepository implements RepositoryInterface
         $this->_model = new $modelClass;
     }
 
-    public function all(): array
+    public function all()
     {
-        return $this->_model->all()->toArray();
+        return $this->_model->all();
     }
 
     public function find(int $id, bool $failIfNotExist = true)

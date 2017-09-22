@@ -33,5 +33,6 @@ $app->get('/', function(RequestInterface $request) use ($app) {
 require_once __DIR__ . '/../src/Cardapium/Controllers/users.php';
 require_once __DIR__ . '/../src/Cardapium/Controllers/auth.php';
 require_once __DIR__ . '/../src/Cardapium/Controllers/ingredient-types.php';
+require_once __DIR__ . '/../src/Cardapium/Controllers/ingredients.php';
 
 $app->start();
