@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Itens
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">#</th>
+                                        <td>{{ meal.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Refeição</th>
+                                        <td>{{ meal.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% set action = route('meals-itens.store') %}
+                            {% set submitIcon = 'ok' %}
+                            {% include 'meals-itens/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

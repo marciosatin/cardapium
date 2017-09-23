@@ -6,13 +6,13 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Ingredientes
+                        Refeições
                     </h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="{{ route('ingredients.new') }}" class="btn btn-default">
+                            <a href="{{ route('meals.new') }}" class="btn btn-default">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </div>
@@ -25,22 +25,20 @@
                                     <tr>
                                         <th style="width: 10px">#</th>
                                         <th>Nome</th>
-                                        <th>Tipo</th>
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for ingredient in ingredients %}
+                                    {% for meal in meals %}
                                         <tr>
-                                            <td>{{ ingredient.id }}</td>
-                                            <td>{{ ingredient.name }}</td>
-                                            <td>{{ ingredient.ingredientTypes.name }}</td>
+                                            <td>{{ meal.id }}</td>
+                                            <td>{{ meal.name }}</td>
                                             <td>
-                                                <a href="{{ route('ingredients.edit', {'id': ingredient.id}) }}">
+                                                <a href="{{ route('meals.edit', {'id': meal.id}) }}">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
                                                 |
-                                                <a href="{{ route('ingredients.show', {'id': ingredient.id}) }}">
+                                                <a href="{{ route('meals.show', {'id': meal.id}) }}">
                                                     <span class="glyphicon glyphicon-remove"></span>
                                                 </a>
                                             </td>

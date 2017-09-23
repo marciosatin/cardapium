@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Nova refeição
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    {% set action = route('meals.store') %}
+                    {% set submitIcon = 'forward' %}
+                    {% include 'meals/_form.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -6,6 +6,9 @@ namespace Cardapium\Plugins;
 
 use Cardapium\Models\Ingredient;
 use Cardapium\Models\IngredientType;
+use Cardapium\Models\Meal;
+use Cardapium\Models\MealItem;
+use Cardapium\Models\State;
 use Cardapium\Models\User;
 use Cardapium\Repository\RepositoryFactory;
 use Cardapium\ServiceContainerInterface;
@@ -31,6 +34,15 @@ class DbPlugin implements PluginInterface
         });
         $container->addLazy('ingredient-type.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(IngredientType::class);
+        });
+        $container->addLazy('state.repository', function (ContainerInterface $container) {
+            return $container->get('repository.factory')->factory(State::class);
+        });
+        $container->addLazy('meal.repository', function (ContainerInterface $container) {
+            return $container->get('repository.factory')->factory(Meal::class);
+        });
+        $container->addLazy('meal-item.repository', function (ContainerInterface $container) {
+            return $container->get('repository.factory')->factory(MealItem::class);
         });
     }
 
