@@ -38,9 +38,14 @@
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
                                                 |
+                                                <a href="{{ route('meals-itens.add', {'id': meal.id}) }}" title="Itens">
+                                                    <span class="glyphicon glyphicon-list"></span>
+                                                </a>
+                                                |
                                                 <a href="{{ route('meals.show', {'id': meal.id}) }}">
                                                     <span class="glyphicon glyphicon-remove"></span>
                                                 </a>
+                                                
                                             </td>
                                         </tr>
                                     {% endfor %}

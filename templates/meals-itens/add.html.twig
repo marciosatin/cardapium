@@ -6,7 +6,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Itens
+                        Adicionar itens
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -32,6 +32,44 @@
                             {% set action = route('meals-itens.store') %}
                             {% set submitIcon = 'ok' %}
                             {% include 'meals-itens/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Itens adicionados
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Ingrediente</th>
+                                        <th>Estado</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                        <tr>
+                                            <td>{{ item.ingredients.name }}</td>
+                                            <td>{{ item.states.name }}</td>
+                                            <td>
+                                                <a href="{{ route('meals-itens.show', {'id': item.id}) }}">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
