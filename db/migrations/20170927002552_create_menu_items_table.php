@@ -11,8 +11,10 @@ class CreateMenuItemsTable extends AbstractMigration
                 ->addColumn('dt_week', 'date')
                 ->addColumn('meal_split_id', 'integer')
                 ->addColumn('meal_id', 'integer')
+                ->addColumn('menu_id', 'integer')
                 ->addColumn('created_at', 'datetime')
                 ->addColumn('updated_at', 'datetime')
+                ->addForeignKey('menu_id', 'meals', 'id')
                 ->addForeignKey('meal_id', 'meals', 'id')
                 ->save();
     }

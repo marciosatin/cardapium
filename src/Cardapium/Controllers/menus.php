@@ -29,6 +29,10 @@ $app->get('/menus', function() use($app) {
         ->post('/menus/store', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
             $repository = $app->service('menu.repository');
+
+            $data['dt_start'] = dateParse($data['dt_start']);
+            $data['dt_end'] = dateParse($data['dt_end']);
+
             $model = $repository->create($data);
             return $app->redirect('/menu-items/' . $model->id . '/add');
         }, 'menus.store')
