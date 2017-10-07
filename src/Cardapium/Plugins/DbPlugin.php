@@ -9,6 +9,7 @@ use Cardapium\Models\IngredientType;
 use Cardapium\Models\Meal;
 use Cardapium\Models\MealsIten;
 use Cardapium\Models\Menu;
+use Cardapium\Models\MenuItem;
 use Cardapium\Models\State;
 use Cardapium\Models\User;
 use Cardapium\Repository\RepositoryFactory;
@@ -48,7 +49,7 @@ class DbPlugin implements PluginInterface
         $container->addLazy('menu.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(Menu::class);
         });
-        $container->addLazy('menu-items.repository', function (ContainerInterface $container) {
+        $container->addLazy('menu-item.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(MenuItem::class);
         });
     }

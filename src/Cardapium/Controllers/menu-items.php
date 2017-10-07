@@ -6,17 +6,16 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
             $view = $app->service('view.renderer');
             $id = (int) $request->getAttribute('id');
             $repository = $app->service('menu.repository');
-            $repositoryI = $app->service('ingredient.repository');
-            $repositoryS = $app->service('state.repository');
+            $repositoryI = $app->service('meal.repository');
             $menu = $repository->findOneBy([
                 'id' => $id,
             ]);
 
             $types = [
-                ['id' => 1, 'name' => 'Principal'],
-                ['id' => 2, 'name' => 'Acompanhamento'],
-                ['id' => 3, 'name' => 'Salada'],
-                ['id' => 4, 'name' => 'Legume']
+                1 => 'Almoço',
+                2 => 'Jantar',
+                3 => 'Café da manhã',
+                4 => 'Café da tarde'
             ];
 
             $repositoryItem = $app->service('menu-item.repository');
@@ -24,16 +23,18 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
 
             return $view->render('menu-items/add.html.twig', [
                         'menu' => $menu,
-                        'ingredients' => $repositoryI->all(),
-                        'states' => $repositoryS->all(),
-                        'types' => $types,
+                        'meals' => $repositoryI->all(),
+                        'meal_splits' => $types,
                         'items' => $items
             ]);
         }, 'menu-items.add')
         ->post('/menu-items/store', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
+            $data['dt_week'] = dateParse($data['dt_week']);
+
             $repository = $app->service('menu-item.repository');
             $model = $repository->create($data);
+
             return $app->redirect('/menu-items/' . $model->menu_id . '/add');
         }, 'menu-items.store')
         ->get('/menu-items/{id}/show', function(ServerRequestInterface $request) use($app) {

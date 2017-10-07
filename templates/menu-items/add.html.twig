@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Adicionar itens
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">#</th>
+                                        <td>{{ menu.id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Cardápio</th>
+                                        <td>{{ menu.name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            {% set action = route('menu-items.store') %}
+                            {% set submitIcon = 'ok' %}
+                            {% include 'menu-items/_form.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Itens adicionados
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <br/>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Refeição</th>
+                                        <th>Tipo</th>
+                                        <th>Dia</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in items %}
+                                        <tr>
+                                            <td>{{ item.meals.name }}</td>
+                                            <td>{{ meal_splits[item.meal_split_id] }}</td>
+                                            <td>{{ item.dt_week | date('d/m/Y') }}</td>
+                                            <td>
+                                                <a href="{{ route('meals-itens.show', {'id': item.id}) }}">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

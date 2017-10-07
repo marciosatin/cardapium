@@ -6,6 +6,7 @@ use Cardapium\Plugins\PluginInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\JsonResponse;
 use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\Response\SapiEmitter;
 
@@ -113,10 +114,16 @@ class Application
         $this->emitResponse($response);
     }
 
+    public function json($data)
+    {
+        return new JsonResponse($data);
+    }
+    
     protected function emitResponse(ResponseInterface $response)
     {
         $emitter = new SapiEmitter();
         $emitter->emit($response);
     }
+
 
 }

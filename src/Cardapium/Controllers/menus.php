@@ -6,8 +6,15 @@ $app->get('/menus', function() use($app) {
             $view = $app->service('view.renderer');
             $repository = $app->service('menu.repository');
             $menus = $repository->all();
+
+            $types = [
+                1 => 'Mensal',
+                2 => 'Semanal',
+            ];
+
             return $view->render('menus/list.html.twig', [
-                        'menus' => $menus
+                        'menus' => $menus,
+                        'types' => $types,
             ]);
         }, 'menus.list')
         ->get('/menus/new', function() use($app) {
@@ -16,8 +23,8 @@ $app->get('/menus', function() use($app) {
             $menus = $menuRepo->all();
 
             $types = [
-                0 => 'Mensal',
-                1 => 'Semanal',
+                1 => 'Mensal',
+                2 => 'Semanal',
             ];
 
             return $view->render(

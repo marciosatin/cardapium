@@ -38,5 +38,6 @@ require_once __DIR__ . '/../src/Cardapium/Controllers/states.php';
 require_once __DIR__ . '/../src/Cardapium/Controllers/meals.php';
 require_once __DIR__ . '/../src/Cardapium/Controllers/meals-itens.php';
 require_once __DIR__ . '/../src/Cardapium/Controllers/menus.php';
+require_once __DIR__ . '/../src/Cardapium/Controllers/menu-items.php';
 
 $app->start();

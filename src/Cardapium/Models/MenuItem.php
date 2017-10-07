@@ -12,6 +12,7 @@ class MenuItem extends Model
         'dt_week',
         'meal_split_id',
         'meal_id',
+        'menu_id',
     ];
 
     public function meals()
