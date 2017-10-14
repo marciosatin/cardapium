@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Lista de compras
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline text-center" method="get" action="{{ route('shopping-list.list') }}">
+                        <div class="form-group">
+                            <label class="control-label">Início</label>
+                            <input class="form-control" type="text" placeholder="DD/MM/YYY"
+                                   name="dtInicio" value="{{ dtInicio | date('d/m/Y') }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Fim</label>
+                            <input class="form-control" type="text" placeholder="DD/MM/YYY"
+                                   name="dtFim" value="{{ dtFim | date('d/m/Y') }}">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control"
+                                    name="menu_id">
+                                {%  for menu in menus %}
+                                    <option value="{{ menu.id }}">
+                                        {{ menu.name }}
+                                    </option>
+                                {% endfor %}            
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </form>
+                    <div class="col-xs-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in itens %}
+                                    <tr>
+                                        <td>{{ item.id }}</td>
+                                        <td>{{ item.name }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

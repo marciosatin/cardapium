@@ -13,6 +13,7 @@ use Cardapium\Models\MenuItem;
 use Cardapium\Models\State;
 use Cardapium\Models\User;
 use Cardapium\Repository\RepositoryFactory;
+use Cardapium\Repository\ShoppingListRepository;
 use Cardapium\ServiceContainerInterface;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Interop\Container\ContainerInterface;
@@ -51,6 +52,9 @@ class DbPlugin implements PluginInterface
         });
         $container->addLazy('menu-item.repository', function (ContainerInterface $container) {
             return $container->get('repository.factory')->factory(MenuItem::class);
+        });
+        $container->addLazy('shopping-list.repository', function () {
+            return new ShoppingListRepository();
         });
     }
 
