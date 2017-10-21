@@ -51,6 +51,11 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            <label>
+                                                <input type="checkbox" name="checkAll">
+                                            </label>
+                                        </th>
                                         <th>Ingrediente</th>
                                         <th>Estado</th>
                                         <th>Ações</th>
@@ -59,6 +64,11 @@
                                 <tbody>
                                     {% for item in items %}
                                         <tr>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" name="id[]" value="{{ item.id }}">
+                                                </label>
+                                            </td>
                                             <td>{{ item.ingredients.name }}</td>
                                             <td>{{ item.states.name }}</td>
                                             <td>

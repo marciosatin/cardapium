@@ -51,6 +51,11 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>
+                                            <label>
+                                                <input type="checkbox" name="checkAll">
+                                            </label>
+                                        </th>
                                         <th>Refeição</th>
                                         <th>Tipo</th>
                                         <th>Dia</th>
@@ -60,6 +65,11 @@
                                 <tbody>
                                     {% for item in items %}
                                         <tr>
+                                            <td>
+                                                <label>
+                                                    <input type="checkbox" name="id[]" value="{{ item.id }}">
+                                                </label>
+                                            </td>
                                             <td>{{ item.meals.name }}</td>
                                             <td>{{ meal_splits[item.meal_split_id] }}</td>
                                             <td>{{ item.dt_week | date('d/m/Y') }}</td>
@@ -78,4 +88,7 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script src="/js/menu-items/add.js"></script>
 {% endblock %}
