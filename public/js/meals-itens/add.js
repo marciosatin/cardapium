@@ -1,4 +1,4 @@
-$c.MenuItems.add = (function () {
+$c.MealsItens.add = (function () {
     'use strict';
 
     return function () {
@@ -9,4 +9,4 @@ $c.MenuItems.add = (function () {
 
 })();
 
-new $c.MenuItems.add().init();
+new $c.MealsItens.add().init();

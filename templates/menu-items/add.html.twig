@@ -53,7 +53,7 @@
                                     <tr>
                                         <th>
                                             <label>
-                                                <input type="checkbox" name="checkAll">
+                                                <input class="checkAll" type="checkbox" name="checkAll">
                                             </label>
                                         </th>
                                         <th>Refeição</th>
@@ -70,7 +70,7 @@
                                                     <input type="checkbox" name="id[]" value="{{ item.id }}">
                                                 </label>
                                             </td>
-                                            <td>{{ item.meals.name }}</td>
+                                            <td><a href="/meals-itens/{{ item.meal_id }}/add">{{ item.meals.name }}</a></td>
                                             <td>{{ meal_splits[item.meal_split_id] }}</td>
                                             <td>{{ item.dt_week | date('d/m/Y') }}</td>
                                             <td>
