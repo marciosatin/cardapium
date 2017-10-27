@@ -72,7 +72,7 @@
                                             <td>{{ item.ingredients.name }}</td>
                                             <td>{{ item.states.name }}</td>
                                             <td>
-                                                <a href="{{ route('meals-itens.show', {'id': item.id}) }}">
+                                                <a class="delItem" href="javascript:;" data-id="{{item.id }}">
                                                     <span class="glyphicon glyphicon-remove"></span>
                                                 </a>
                                             </td>

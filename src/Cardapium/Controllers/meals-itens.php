@@ -61,5 +61,19 @@ $app->get('/meals-itens/{id}/add', function(ServerRequestInterface $request) use
                 'id' => $mealItem->id,
             ]);
             return $app->redirect('/meals-itens/' . $mealId . '/add');
-        }, 'meals-itens.delete');
+        }, 'meals-itens.delete')
+        ->post('/meals-itens/del', function(ServerRequestInterface $request) use($app) {
+            $data = $request->getParsedBody();
+            $repository = $app->service('meal-item.repository');
+
+            $mealItem = $repository->findOneBy([
+                'id' => $data['id'],
+            ]);
+
+            $repository->delete([
+                'id' => $mealItem->id,
+            ]);
+
+            return $app->json($mealItem);
+        }, 'meals-itens.del');
 
