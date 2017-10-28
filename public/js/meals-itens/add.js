@@ -3,69 +3,63 @@ $c.MealsItens.add = (function () {
     return function () {
         this.init = function () {
             new Checkbox.marcarTodos().init();
-            initDelItens();
+            initDelItensClick()
+            initDelItensBatch();
         };
-        const initDelItens = function () {
+        const initDelItensBatch = function () {
+            $('.delItens').on('click', function (e) {
+                e.preventDefault();
+                let ids = [];
+                const c = $('input:checkbox:checked');
+                c.each(function () {
+                    ids.push($(this).val());
+                });
+
+                if (ids.length > 0) {
+                    const callback = function () {
+                        delItens(ids);
+                    };
+
+                    showDialog(callback);
+                }
+            });
+        };
+        const initDelItensClick = function () {
             $('.delItem').on('click', function (e) {
                 e.preventDefault();
 
-                const id = $(this).data('id');
+                const ids = $(this).data('id');
                 const callback = function () {
-                    let fd = new FormData();
-                    fd.append('id', id);
-                    $.ajax({
-                        method: "POST",
-                        url: "/meals-itens/del",
-                        data: fd,
-                        processData: false,
-                        contentType: false
-                    }).done(function (data) {
-                        console.log(data);
-                        window.location.reload();
-                    });
-                };
-                const options = {
-                    heading: "Confirmação",
-                    question: "Deseja realmente remover?",
-                    cancelButtonTxt: "Cancelar",
-                    okButtonTxt: "Deletar",
-                    callback: callback
+                    delItens(ids);
                 };
 
-                confirm(options);
+                showDialog(callback);
             });
 
         };
-        const confirm = function (options) {
-            const confirmModal =
-                    $('<div class="modal fade" tabindex="-1" role="dialog">' +
-                            '<div class="modal-dialog" role="document">' +
-                            '<div class="modal-content">' +
-                            '<div class="modal-header">' +
-                            '<button type="button" class="close" data-dismiss="modal" aria-label="Close">' +
-                            '<span aria-hidden="true">&times;</span>' +
-                            '</button>' +
-                            '<h4 class="modal-title">' + options.heading + '</h4>' +
-                            '</div>' +
-                            '<div class="modal-body">' +
-                            '<p>' + options.question + '&hellip;</p>' +
-                            '</div>' +
-                            '<div class="modal-footer">' +
-                            '<button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">' + options.cancelButtonTxt + '</button>' +
-                            '<button type="button" class="btn btn-primary btn-ok">' + options.okButtonTxt + '</button>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>' +
-                            '</div>');
-
-            confirmModal.find('.btn-ok').click(function (event) {
-                options.callback();
-                confirmModal.modal('hide');
+        const showDialog = function (callback) {
+            new Dialog().init({
+                heading: "Confirmação",
+                description: "Deseja realmente remover?",
+                cancelButtonTxt: "Cancelar",
+                okButtonTxt: "Deletar",
+                callback: callback
             });
-
-            confirmModal.modal('show');
         };
-
+        const delItens = function (ids) {
+            let fd = new FormData();
+            fd.append('id', ids);
+            $.ajax({
+                method: 'POST',
+                url: '/meals-itens/del',
+                data: fd,
+                processData: false,
+                contentType: false
+            }).done(function (data) {
+                console.log(data);
+//                window.location.reload();
+            });
+        };
     };
 
 })();
