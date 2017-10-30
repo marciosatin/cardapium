@@ -3,7 +3,7 @@ $c.MealsItens.add = (function () {
     return function () {
         this.init = function () {
             new Checkbox.marcarTodos().init();
-            initDelItensClick()
+            initDelItensClick();
             initDelItensBatch();
         };
         const initDelItensBatch = function () {
@@ -57,7 +57,7 @@ $c.MealsItens.add = (function () {
                 contentType: false
             }).done(function (data) {
                 console.log(data);
-//                window.location.reload();
+                window.location.reload();
             });
         };
     };

@@ -62,5 +62,19 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
                 'id' => $menuItem->id,
             ]);
             return $app->redirect('/menu-items/' . $menuId . '/add');
-        }, 'menu-items.delete');
+        }, 'menu-items.delete')
+        ->post('/menu-items/del', function(ServerRequestInterface $request) use($app) {
+            $data = $request->getParsedBody();
+            $repository = $app->service('menu-item.repository');
+
+            $ids = explode(',', $data['id']);
+
+            foreach ($ids as $id) {
+                $repository->delete([
+                    'id' => (int) $id,
+                ]);
+            }
+
+            return $app->json(['response' => 'ok']);
+        }, 'menu-items.del');
 

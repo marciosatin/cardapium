@@ -66,14 +66,14 @@ $app->get('/meals-itens/{id}/add', function(ServerRequestInterface $request) use
             $data = $request->getParsedBody();
             $repository = $app->service('meal-item.repository');
 
-            $mealItem = $repository->findOneBy([
-                'id' => $data['id'],
-            ]);
+            $ids = explode(',', $data['id']);
 
-            $repository->delete([
-                'id' => $mealItem->id,
-            ]);
+            foreach ($ids as $id) {
+                $repository->delete([
+                    'id' => (int) $id,
+                ]);
+            }
 
-            return $app->json($mealItem);
+            return $app->json(['response' => 'ok']);
         }, 'meals-itens.del');
 

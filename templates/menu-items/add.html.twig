@@ -6,7 +6,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Adicionar itens
+                        Itens adicionados
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -39,10 +39,21 @@
         </div>
         <div class="row">
             <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
+                <div class="panel-heading clearfix">
+                    <h3 class="panel-title pull-left">
                         Itens adicionados
                     </h3>
+                    <!-- Small button group -->
+                    <div class="btn-group pull-right">
+                        <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ações <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="delItens" href="javascript:;">Excluir</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <br/>
@@ -74,7 +85,7 @@
                                             <td>{{ meal_splits[item.meal_split_id] }}</td>
                                             <td>{{ item.dt_week | date('d/m/Y') }}</td>
                                             <td>
-                                                <a href="{{ route('meals-itens.show', {'id': item.id}) }}">
+                                                <a class="delItem" href="javascript:;" data-id="{{item.id }}">
                                                     <span class="glyphicon glyphicon-remove"></span>
                                                 </a>
                                             </td>
