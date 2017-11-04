@@ -32,17 +32,11 @@ $app->get('/meals', function() use($app) {
             $meal = $repository->findOneBy([
                 'id' => $id,
             ]);
-            $mealRepo = $app->service('meal-meal.repository');
-            $meals = $mealRepo->all();
-            return $view->render(
-                            'meals/edit.html.twig', [
-                        'meal' => $meal,
-                        'meals' => $meals
-                            ]
-            );
+
+            return $view->render('meals/edit.html.twig', ['meal' => $meal]);
         }, 'meals.edit')
         ->post('/meals/{id}/update', function(ServerRequestInterface $request) use($app) {
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $data = $request->getParsedBody();
 
             $repository = $app->service('meal.repository');

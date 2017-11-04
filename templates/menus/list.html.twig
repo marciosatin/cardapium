@@ -39,15 +39,13 @@
                                                 <a href="{{ route('menus.edit', {'id': menu.id}) }}">
                                                     <span class="glyphicon glyphicon-pencil"></span>
                                                 </a>
-                                                |
                                                 <a href="{{ route('menu-items.add', {'id': menu.id}) }}" title="Itens">
                                                     <span class="glyphicon glyphicon-list"></span>
                                                 </a>
-                                                |
-                                                <a href="{{ route('menus.show', {'id': menu.id}) }}">
+                                                {#<a href="{{ route('menus.show', {'id': menu.id}) }}">
                                                     <span class="glyphicon glyphicon-remove"></span>
                                                 </a>
-                                                
+                                                #}
                                             </td>
                                         </tr>
                                     {% endfor %}

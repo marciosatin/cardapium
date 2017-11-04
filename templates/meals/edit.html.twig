@@ -6,13 +6,13 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Editar ingrediente
+                        Editar refeição
                     </h3>
                 </div>
                 <div class="panel-body">
-                    {% set action = route('ingredients.update', {'id': ingredient.id}) %}
+                    {% set action = route('meals.update', {'id': meal.id}) %}
                     {% set submitIcon = 'pencil' %}
-                    {% include 'ingredients/_form.html.twig' %}
+                    {% include 'meals/_form.html.twig' %}
                 </div>
             </div>
         </div>

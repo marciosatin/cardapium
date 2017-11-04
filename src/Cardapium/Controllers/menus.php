@@ -46,22 +46,27 @@ $app->get('/menus', function() use($app) {
         ->get('/menus/{id}/edit', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
             $repository = $app->service('menu.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $menu = $repository->findOneBy([
                 'id' => $id,
             ]);
-            $menuRepo = $app->service('menu-menu.repository');
-            $menus = $menuRepo->all();
-            return $view->render(
-                            'menus/edit.html.twig', [
+
+            $types = [
+                1 => 'Mensal',
+                2 => 'Semanal',
+            ];
+            return $view->render('menus/edit.html.twig', [
                         'menu' => $menu,
-                        'menus' => $menus
+                        'types' => $types,
                             ]
             );
         }, 'menus.edit')
         ->post('/menus/{id}/update', function(ServerRequestInterface $request) use($app) {
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $data = $request->getParsedBody();
+
+            $data['dt_start'] = dateParse($data['dt_start']);
+            $data['dt_end'] = dateParse($data['dt_end']);
 
             $repository = $app->service('menu.repository');
             $repository->update([

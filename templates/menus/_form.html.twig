@@ -9,7 +9,7 @@
         <select class="form-control"
                 name="type_id">
             {%  for id, type in types %}
-                <option value="{{ id }}">
+                <option {{ (menu.type_id == id) ? "selected" : "" }} value="{{ id }}">
                     {{ type }}
                 </option>
             {% endfor %}            
