@@ -4,7 +4,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 $app->get('/meals-itens/{id}/add', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('meal.repository');
             $repositoryI = $app->service('ingredient.repository');
             $repositoryS = $app->service('state.repository');
@@ -38,7 +38,7 @@ $app->get('/meals-itens/{id}/add', function(ServerRequestInterface $request) use
         }, 'meals-itens.store')
         ->get('/meals-itens/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('meal-item.repository');
             $mealItem = $repository->findOneBy([
                 'id' => $id,
@@ -49,7 +49,7 @@ $app->get('/meals-itens/{id}/add', function(ServerRequestInterface $request) use
         }, 'meals-itens.show')
         ->get('/meals-itens/{id}/delete', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('meal-item.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
 
             $mealItem = $repository->findOneBy([
                 'id' => $id,

@@ -28,7 +28,7 @@ $app->get('/meals', function() use($app) {
         ->get('/meals/{id}/edit', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
             $repository = $app->service('meal.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $meal = $repository->findOneBy([
                 'id' => $id,
             ]);
@@ -48,7 +48,7 @@ $app->get('/meals', function() use($app) {
         }, 'meals.update')
         ->get('/meals/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('meal.repository');
             $meal = $repository->findOneBy([
                 'id' => $id,
@@ -59,7 +59,7 @@ $app->get('/meals', function() use($app) {
         }, 'meals.show')
         ->get('/meals/{id}/delete', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('meal.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository->delete([
                 'id' => $id,
             ]);

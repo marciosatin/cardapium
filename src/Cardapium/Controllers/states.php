@@ -26,7 +26,7 @@ $app->get(
         ->get(
                 '/states/{id}/edit', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('state.repository');
             $state = $repository->find($id);
             return $view->render('states/edit.html.twig', [
@@ -44,7 +44,7 @@ $app->get(
         ->get(
                 '/states/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('state.repository');
             $state = $repository->find($id);
             return $view->render('states/show.html.twig', [

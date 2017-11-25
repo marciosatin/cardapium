@@ -28,7 +28,7 @@ $app->get(
         ->get(
                 '/users/{id}/edit', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('user.repository');
             $user = $repository->find($id);
             return $view->render('users/edit.html.twig', [
@@ -38,7 +38,7 @@ $app->get(
         ->post(
                 '/users/{id}/update', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('user.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $data = $request->getParsedBody();
             if (isset($data['password'])) {
                 unset($data['password']);
@@ -49,7 +49,7 @@ $app->get(
         ->get(
                 '/users/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('user.repository');
             $user = $repository->find($id);
             return $view->render('users/show.html.twig', [
@@ -59,7 +59,7 @@ $app->get(
         ->get(
                 '/users/{id}/delete', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('user.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository->delete($id);
             return $app->route('users.list');
         }, 'users.delete');

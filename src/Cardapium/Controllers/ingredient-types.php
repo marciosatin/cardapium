@@ -26,7 +26,7 @@ $app->get(
         ->get(
                 '/ingredient-types/{id}/edit', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('ingredient-type.repository');
             $ingredientType = $repository->find($id);
             return $view->render('ingredient-types/edit.html.twig', [
@@ -44,7 +44,7 @@ $app->get(
         ->get(
                 '/ingredient-types/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('ingredient-type.repository');
             $ingredientType = $repository->find($id);
             return $view->render('ingredient-types/show.html.twig', [

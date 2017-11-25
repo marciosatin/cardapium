@@ -77,7 +77,7 @@ $app->get('/menus', function() use($app) {
         }, 'menus.update')
         ->get('/menus/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('menu.repository');
             $menu = $repository->findOneBy([
                 'id' => $id,
@@ -88,7 +88,7 @@ $app->get('/menus', function() use($app) {
         }, 'menus.show')
         ->get('/menus/{id}/delete', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('menu.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository->delete([
                 'id' => $id,
             ]);

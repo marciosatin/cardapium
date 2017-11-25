@@ -39,7 +39,7 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
         }, 'menu-items.store')
         ->get('/menu-items/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('menu-item.repository');
             $menuItem = $repository->findOneBy([
                 'id' => $id,
@@ -50,7 +50,7 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
         }, 'menu-items.show')
         ->get('/menu-items/{id}/delete', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('menu-item.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
 
             $menuItem = $repository->findOneBy([
                 'id' => $id,

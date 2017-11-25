@@ -35,7 +35,7 @@ $app->get('/ingredients', function() use($app) {
         ->get('/ingredients/{id}/edit', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
             $repository = $app->service('ingredient.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $ingredient = $repository->findOneBy([
                 'id' => $id,
             ]);
@@ -49,7 +49,7 @@ $app->get('/ingredients', function() use($app) {
             );
         }, 'ingredients.edit')
         ->post('/ingredients/{id}/update', function(ServerRequestInterface $request) use($app) {
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $data = $request->getParsedBody();
 
 
@@ -68,7 +68,7 @@ $app->get('/ingredients', function() use($app) {
         }, 'ingredients.update')
         ->get('/ingredients/{id}/show', function(ServerRequestInterface $request) use($app) {
             $view = $app->service('view.renderer');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository = $app->service('ingredient.repository');
             $ingredient = $repository->findOneBy([
                 'id' => $id,
@@ -79,7 +79,7 @@ $app->get('/ingredients', function() use($app) {
         }, 'ingredients.show')
         ->get('/ingredients/{id}/delete', function(ServerRequestInterface $request) use($app) {
             $repository = $app->service('ingredient.repository');
-            $id = $request->getAttribute('id');
+            $id = (int) $request->getAttribute('id');
             $repository->delete([
                 'id' => $id,
             ]);
