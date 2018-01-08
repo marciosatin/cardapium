@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface;
 $app->get('/menus', function() use($app) {
             $view = $app->service('view.renderer');
             $repository = $app->service('menu.repository');
-            $menus = $repository->all();
+            $menus = $repository->all()->sortByDesc('id');
 
             $types = [
                 1 => 'Mensal',

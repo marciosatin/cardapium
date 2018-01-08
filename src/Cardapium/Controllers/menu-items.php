@@ -23,7 +23,7 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
 
             return $view->render('menu-items/add.html.twig', [
                         'menu' => $menu,
-                        'meals' => $repositoryI->all(),
+                        'meals' => $repositoryI->all()->sortBy('name'),
                         'meal_splits' => $types,
                         'items' => $items
             ]);

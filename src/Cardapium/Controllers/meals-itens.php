@@ -24,8 +24,8 @@ $app->get('/meals-itens/{id}/add', function(ServerRequestInterface $request) use
 
             return $view->render('meals-itens/add.html.twig', [
                         'meal' => $meal,
-                        'ingredients' => $repositoryI->all(),
-                        'states' => $repositoryS->all(),
+                        'ingredients' => $repositoryI->all()->sortBy('name'),
+                        'states' => $repositoryS->all()->sortBy('name'),
                         'types' => $types,
                         'items' => $items
             ]);
