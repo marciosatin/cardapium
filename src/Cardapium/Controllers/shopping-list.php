@@ -10,11 +10,11 @@ $app
 
         $dtInicio = $data['dtInicio'] ?? new \DateTime();
         $dtInicio = $dtInicio instanceof \DateTime ? $dtInicio->format('Y-m-d')
-            : \DateTime::createFromFormat('d/m/Y', $dtInicio)->format('Y-m-d');
+            : \DateTime::createFromFormat('Y-m-d', $dtInicio)->format('Y-m-d');
 
         $dtFim = $data['dtFim'] ?? (new \DateTime())->modify('+7 days');
         $dtFim = $dtFim instanceof \DateTime ? $dtFim->format('Y-m-d')
-            : \DateTime::createFromFormat('d/m/Y', $dtFim)->format('Y-m-d');
+            : \DateTime::createFromFormat('Y-m-d', $dtFim)->format('Y-m-d');
 
         $menuId = isset($data['menu_id']) ? (int) $data['menu_id'] : 0;
 
