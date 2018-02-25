@@ -30,9 +30,16 @@ $app
         $dtFim = $dtFim instanceof \DateTime ? $dtFim->format('Y-m-d')
             : \DateTime::createFromFormat('Y-m-d', $dtFim)->format('Y-m-d');
 
+        $repository = $app->service('menu-generator.repository');
+        $dataView = $repository->generate([
+            'dtInicio' => $dtInicio,
+            'dtFim' => $dtFim
+        ]);
+
+//        die('<pre>' . print_r($dataView, true) . " File: " . __FILE__ . " Linha: " . __LINE__ . '</pre>');
+
         return $app->service('view.renderer')
-                ->render('/menu-generator/filter.html.twig', [
-                    'dtInicio' => $dtInicio,
-                    'dtFim' => $dtFim
+                ->render('/menu-generator/list.html.twig', [
+                    'menu' => $dataView,
                 ]);
     }, 'menu-generator.store');
