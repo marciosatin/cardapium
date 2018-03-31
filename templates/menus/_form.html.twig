@@ -17,13 +17,13 @@
     </div>
     <div class="form-group">
         <label class="control-label">Data inicial</label>
-        <input class="form-control" type="text" placeholder="DD/MM/YYYY"
-               name="dt_start" value="{{ menu.dt_start | date('d/m/Y') }}">
+        <input class="form-control" type="date" placeholder="DD/MM/YYYY"
+               name="dt_start" value="{{ menu.dt_start }}">
     </div>
     <div class="form-group">
         <label class="control-label">Data final</label>
-        <input class="form-control" type="text" placeholder="DD/MM/YYYY"
-               name="dt_end" value="{{ menu.dt_end | date('d/m/Y')}}">
+        <input class="form-control" type="date" placeholder="DD/MM/YYYY"
+               name="dt_end" value="{{ menu.dt_end }}">
     </div>
     <button type="submit" class="btn btn-primary btn-block">
         Avançar

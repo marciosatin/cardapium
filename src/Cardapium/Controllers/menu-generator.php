@@ -36,10 +36,9 @@ $app
             'dtFim' => $dtFim
         ]);
 
-//        die('<pre>' . print_r($dataView, true) . " File: " . __FILE__ . " Linha: " . __LINE__ . '</pre>');
-
         return $app->service('view.renderer')
                 ->render('/menu-generator/list.html.twig', [
-                    'menu' => $dataView,
+                    'headers' => $dataView['headers'],
+                    'menu' => $dataView['menu'],
                 ]);
     }, 'menu-generator.store');

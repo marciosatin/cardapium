@@ -10,3 +10,22 @@ table label {
 table label input[type=checkbox] {
     cursor: pointer;
 }
+
+/**
+* Cardapio generator
+**/
+.head-week-day,
+.cell-week-day{
+    float: left;
+    display: block;
+    box-sizing: border-box;
+    padding: 5px;
+    width: 13.285714%;
+    margin-left: 10px;
+}
+
+.cell-week-day {
+    border: 1px solid #CCC;
+    height: 150px;
+    margin-bottom: 5px;
+}

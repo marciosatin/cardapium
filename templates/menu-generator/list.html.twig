@@ -10,13 +10,26 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <ul>
-                        {% for meals in menu %}
-                        <li>
-                            <span>{{ meals['almoco']['meal']['meal_name'] }}</span>
-                        </li>
+                    <div class="row">
+                        {% for head in headers %}
+                            <div class="head-week-day">
+                                <strong>{{ head }}</strong>
+                            </div>
                         {% endfor %}
-                    </ul>
+                    </div>
+                    <div class="row">
+                        {% for id, meals in menu %}
+                            <div class="cell-week-day">
+                                <span><strong>Dia: {{ id | date('d/m/Y')}}</strong></span><br>
+                                <span><strong>Almoço: </strong></span><br>
+                                <span>{{ meals['almoco']['meal']['meal_name'] }}</span><br>
+                                <span>{{ meals['almoco']['meal']['ingredient_types_id'] }}</span><br>
+                                <span><strong>Jantar: </strong></span><br>
+                                <span>{{ meals['jantar']['meal']['meal_name'] }}</span><br>
+                                <span>{{ meals['jantar']['meal']['ingredient_types_id'] }}</span><br>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

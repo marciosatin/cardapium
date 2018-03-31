@@ -2,7 +2,6 @@
 
 namespace Cardapium\Repository;
 
-use Cardapium\Models\Meal;
 use Cardapium\Models\MealsIten;
 
 /**
@@ -21,16 +20,40 @@ class MenuGeneratorRepository implements MenuGeneratorRepositoryInterface
             $meals = $this->getMeals();
 
             $j = 0;
-            for ($day = strtotime($params['dtInicio']); $day <= strtotime($params['dtFim']); $day = strtotime('+1day', $day)) {
+            $k = 0;
+            $headers = [];
+            $types = [];
+            $dtInicio = strtotime($params['dtInicio']);
+            $dtFim = strtotime($params['dtFim']);
+            for ($day = $dtInicio; $day <= $dtFim; $day = strtotime('+1day', $day)) {
 
                 //dia da semana string
-//                $weekDay = ucfirst(gmstrftime('%A', strtotime($params['dtInicio'])));
+                $weekDay = ucfirst(gmstrftime('%A', $day));
 
                 if (!isset($r[$day])) {
                     $r[$day] = [];
                 }
 
+                if (!isset($r[$day]['weekDay'])) {
+                    $r[$day]['weekDay'] = $weekDay;
+                    if ($j < 7) {
+                        $headers[] = $weekDay;
+                    }
+                }
+
                 $mealsRand = array_random($meals);
+
+                if ($k == 4) {
+                    $k = 0;
+                    $types = [];
+                }
+
+                do {
+                    $mealsRand = array_random($meals);
+                    $typeId = $mealsRand['ingredient_types_id'];
+                } while (in_array($typeId, $types));
+
+                $types[] = $typeId;
 
                 for ($i = 0; $i < 2; $i++) {
                     if (!isset($r[$day]['almoco'])) {
@@ -45,14 +68,14 @@ class MenuGeneratorRepository implements MenuGeneratorRepositoryInterface
                     }
                 }
 
-                if ($j == 2) {
-                    break;
-                }
-
                 $j++;
+                $k++;
             }
 
-            return $r;
+            return [
+                'headers' => $headers,
+                'menu' => $r
+            ];
         }
     }
 
