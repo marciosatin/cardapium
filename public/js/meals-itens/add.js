@@ -1,4 +1,4 @@
-$c.MealsItens.add = (function () {
+$c.MealsItensAdd = (function () {
     'use strict';
     return function () {
         this.init = function () {
@@ -10,7 +10,7 @@ $c.MealsItens.add = (function () {
             $('.delItens').on('click', function (e) {
                 e.preventDefault();
                 let ids = [];
-                const c = $('input:checkbox:checked');
+                const c = $('tbody input:checkbox:checked');
                 c.each(function () {
                     ids.push($(this).val());
                 });
@@ -64,4 +64,4 @@ $c.MealsItens.add = (function () {
 
 })();
 
-new $c.MealsItens.add().init();
+new $c.MealsItensAdd().init();

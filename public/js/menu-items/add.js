@@ -1,4 +1,4 @@
-$c.MenuItems.add = (function () {
+$c.MenuItemsAdd = (function () {
     'use strict';
 
     return function () {
@@ -11,7 +11,7 @@ $c.MenuItems.add = (function () {
             $('.delItens').on('click', function (e) {
                 e.preventDefault();
                 let ids = [];
-                const c = $('input:checkbox:checked');
+                const c = $('tbody input:checkbox:checked');
                 c.each(function () {
                     ids.push($(this).val());
                 });
@@ -65,4 +65,4 @@ $c.MenuItems.add = (function () {
 
 })();
 
-new $c.MenuItems.add().init();
+new $c.MenuItemsAdd().init();

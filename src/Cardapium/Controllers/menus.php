@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Database\QueryException;
 use Psr\Http\Message\ServerRequestInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 $app->get('/menus', function() use($app) {
             $view = $app->service('view.renderer');
@@ -87,10 +89,30 @@ $app->get('/menus', function() use($app) {
             ]);
         }, 'menus.show')
         ->get('/menus/{id}/delete', function(ServerRequestInterface $request) use($app) {
+
+            $erro = '';
             $repository = $app->service('menu.repository');
             $id = (int) $request->getAttribute('id');
-            $repository->delete([
-                'id' => $id,
-            ]);
+
+            $view = $app->service('view.renderer');
+
+            try {
+                $repository->delete(['id' => $id]);
+            } catch (QueryException $exc) {
+                $erro = 'Erro inesperado';
+                if ($exc->getCode() == '23000') {
+                    $erro = 'Não é possível remover o cardápio, remova primeiro os itens';
+                }
+            } catch (ModelNotFoundException $exc) {
+                $erro = 'Registro não encontrado';
+            } catch (Exception $exc) {
+                $erro = 'Ops!! Erro desconhecido';
+            }
+
+            if ($erro) {
+                return $view->render('menus/list.html.twig', [
+                            'erro' => $erro,
+                ]);
+            }
             return $app->route('menus.list');
         }, 'menus.delete');

@@ -1,7 +1,5 @@
 (function () {
     $c = window.Cardapium = {};
-    $c.MenuItems = {};
-    $c.MealsItens = {};
     window.Checkbox = {};
     window.Dialog = {};
 })();

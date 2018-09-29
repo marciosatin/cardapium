@@ -6,10 +6,17 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Cardápio gerado em {{ "now"|date("d/m/Y") }}
+                        Cardápio [ <span class="dtIni" data-dtini="{{ dtIni }}">{{ dtIni | date('d/m/Y') }}</span> - <span class="dtFin" data-dtfin="{{ dtFin }}">{{ dtFin | date('d/m/Y') }}</span> ] gerado em {{ "now"|date("d/m/Y") }}
                     </h3>
                 </div>
                 <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="javascript:;" class="btn btn-default refresh" title="Gerar novamente">
+                                <span class="glyphicon glyphicon-refresh"></span>
+                            </a>
+                        </div>
+                    </div>
                     <div class="row">
                         {% for head in headers %}
                             <div class="head-week-day">
@@ -19,19 +26,25 @@
                     </div>
                     <div class="row">
                         {% for id, meals in menu %}
-                            <div class="cell-week-day">
+                            <div class="cell-week-day" data-day="{{ id|date('Y-m-d') }}" data-amealid="{{ meals['almoco']['meal']['meal_id'] }}" data-jmealid="{{ meals['almoco']['meal']['meal_id'] }}">
                                 <span><strong>Dia: {{ id | date('d/m/Y')}}</strong></span><br>
                                 <span><strong>Almoço: </strong></span><br>
                                 <span>{{ meals['almoco']['meal']['meal_name'] }}</span><br>
-                                <span>{{ meals['almoco']['meal']['ingredient_types_id'] }}</span><br>
+                                {#                                <span>{{ meals['almoco']['meal']['ingredient_types_id'] }}</span><br>#}
                                 <span><strong>Jantar: </strong></span><br>
                                 <span>{{ meals['jantar']['meal']['meal_name'] }}</span><br>
-                                <span>{{ meals['jantar']['meal']['ingredient_types_id'] }}</span><br>
+                                {#                                <span>{{ meals['jantar']['meal']['ingredient_types_id'] }}</span><br>#}
                             </div>
                         {% endfor %}
                     </div>
                 </div>
+                <div class="panel-footer">
+                    <button class="btn btn-primary btn-salvar">Salvar</button>
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script src="/js/menu-generator/add.js"></script>
 {% endblock %}

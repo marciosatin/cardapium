@@ -83,7 +83,7 @@
                                             </td>
                                             <td><a href="/meals-itens/{{ item.meal_id }}/add">{{ item.meals.name }}</a></td>
                                             <td>{{ meal_splits[item.meal_split_id] }}</td>
-                                            <td>{{ item.dt_week | date('d/m/Y') }}</td>
+                                            <td>{{ item.dt_week | date('d/m/Y') }} - {{ item.dt_ext }}</td>
                                             <td>
                                                 <a class="delItem" href="javascript:;" data-id="{{item.id }}">
                                                     <span class="glyphicon glyphicon-remove"></span>

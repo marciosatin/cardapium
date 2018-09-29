@@ -1,60 +1,66 @@
 {% extends 'layout.html.twig' %}
-
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Cardápios
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="{{ route('menus.new') }}" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </a>
-                        </div>
+    {% if (erro) %}
+        <div class="alert alert-danger fade in alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+            <strong>Erro!</strong> {{ erro }}.
+            <a href="/menus">Ir para cardápios</a>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            Cardápios
+                        </h3>
                     </div>
-                    <br/>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Nome</th>
-                                        <th>Tipo</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for menu in menus %}
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{ route('menus.new') }}" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-plus"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-bordered">
+                                    <thead>
                                         <tr>
-                                            <td>{{ menu.id }}</td>
-                                            <td>{{ menu.name }}</td>
-                                            <td>{{ types[menu.type_id] }}</td>
-                                            <td>
-                                                <a href="{{ route('menus.edit', {'id': menu.id}) }}">
-                                                    <span class="glyphicon glyphicon-pencil"></span>
-                                                </a>
-                                                <a href="{{ route('menu-items.add', {'id': menu.id}) }}" title="Itens">
-                                                    <span class="glyphicon glyphicon-list"></span>
-                                                </a>
-                                                {#<a href="{{ route('menus.show', {'id': menu.id}) }}">
-                                                    <span class="glyphicon glyphicon-remove"></span>
-                                                </a>
-                                                #}
-                                            </td>
+                                            <th style="width: 10px">#</th>
+                                            <th>Nome</th>
+                                            <th>Tipo</th>
+                                            <th>Ações</th>
                                         </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        {% for menu in menus %}
+                                            <tr>
+                                                <td>{{ menu.id }}</td>
+                                                <td>{{ menu.name }}</td>
+                                                <td>{{ types[menu.type_id] }}</td>
+                                                <td>
+                                                    <a href="{{ route('menus.edit', {'id': menu.id}) }}">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                    <a href="{{ route('menu-items.add', {'id': menu.id}) }}" title="Itens">
+                                                        <span class="glyphicon glyphicon-list"></span>
+                                                    </a>
+                                                    <a href="{{ route('menus.delete', {'id': menu.id}) }}">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}

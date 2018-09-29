@@ -21,6 +21,10 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
             $repositoryItem = $app->service('menu-item.repository');
             $items = $repositoryItem->findByField('menu_id', $menu->id);
 
+            foreach ($items as $item) {
+                $item->dt_ext = ucfirst(gmstrftime('%A', strtotime($item->dt_week)));
+            }
+
             return $view->render('menu-items/add.html.twig', [
                         'menu' => $menu,
                         'meals' => $repositoryI->all()->sortBy('name'),
