@@ -5,8 +5,10 @@ declare(strict_types = 1);
 namespace Cardapium\Repository;
 
 use Illuminate\Database\Eloquent\Model;
+use Cardapium\Models\Validators\ValidatorException;
+use Cardapium\Models\Validators\ValidatorInterface;
 
-class DefaultRepository implements RepositoryInterface
+class DefaultRepository implements RepositoryInterface, ValidatorInterface
 {
 
     /**
@@ -39,6 +41,7 @@ class DefaultRepository implements RepositoryInterface
     public function create(array $data)
     {
         $this->_model->fill($data);
+        $this->validate($data);
         $this->_model->save();
         return $this->_model;
     }
@@ -47,6 +50,7 @@ class DefaultRepository implements RepositoryInterface
     {
         $model = $this->findInternal($id);
         $model->fill($data);
+        $this->validate($data);
         $model->save();
         return $model;
     }
@@ -70,6 +74,39 @@ class DefaultRepository implements RepositoryInterface
         }
 
         return $queryBuilder->firstOrFail();
+    }
+
+    public function validate(array $data)
+    {
+        $this->_model->prepareFillableValidators();
+        
+        $fields = $this->_model->getFillableValidators();
+        if (!is_array($fields)) {
+            return true;
+        }
+
+        $data = (object) $data;
+
+        $errors = [];
+        foreach ($fields as $field => $value) {
+            if (isset($value['validators']) and isset($data->$field)) {
+                $validators = $value['validators'];
+                foreach ($validators as $validator) {
+                    if (!$validator->isValid($data->$field)) {
+                        if (!isset($errors[$field])) {
+                            $errors[$field] = [];
+                        }
+                        $errors[$field][] = $validator->getMessages();
+                    }
+                }
+            }
+        }
+
+        if ($errors) {
+            $e = new ValidatorException();
+            $e->addErrors($errors);
+            throw $e;
+        }
     }
 
     protected function findInternal($id)

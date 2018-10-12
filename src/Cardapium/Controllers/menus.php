@@ -1,8 +1,10 @@
 <?php
 
+use Cardapium\Models\Menu;
+use Cardapium\Models\Validators\ValidatorException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Psr\Http\Message\ServerRequestInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 $app->get('/menus', function() use($app) {
             $view = $app->service('view.renderer');
@@ -21,18 +23,9 @@ $app->get('/menus', function() use($app) {
         }, 'menus.list')
         ->get('/menus/new', function() use($app) {
             $view = $app->service('view.renderer');
-            $menuRepo = $app->service('menu.repository');
-            $menus = $menuRepo->all();
-
-            $types = [
-                1 => 'Mensal',
-                2 => 'Semanal',
-            ];
-
             return $view->render(
                             'menus/create.html.twig', [
-                        'menus' => $menus,
-                        'types' => $types,
+                        'types' => Menu::getTypes(),
             ]);
         }, 'menus.new')
         ->post('/menus/store', function(ServerRequestInterface $request) use($app) {
@@ -42,7 +35,28 @@ $app->get('/menus', function() use($app) {
             $data['dt_start'] = dateParse($data['dt_start']);
             $data['dt_end'] = dateParse($data['dt_end']);
 
-            $model = $repository->create($data);
+            try {
+                $model = $repository->create($data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render(
+                                'menus/create.html.twig', [
+                            'types' => Menu::getTypes(),
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\Exception $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render(
+                                'menus/create.html.twig', [
+                            'types' => Menu::getTypes(),
+                            'errors' => [
+                                'erro' => [
+                                    0 => 'Algo não saiu como esperado. Contate o suporte informando o erro - ' . $exc->getCode()
+                                ]
+                            ]
+                ]);
+            }
+
             return $app->redirect('/menu-items/' . $model->id . '/add');
         }, 'menus.store')
         ->get('/menus/{id}/edit', function(ServerRequestInterface $request) use($app) {
@@ -53,13 +67,9 @@ $app->get('/menus', function() use($app) {
                 'id' => $id,
             ]);
 
-            $types = [
-                1 => 'Mensal',
-                2 => 'Semanal',
-            ];
             return $view->render('menus/edit.html.twig', [
                         'menu' => $menu,
-                        'types' => $types,
+                        'types' => Menu::getTypes(),
                             ]
             );
         }, 'menus.edit')
@@ -71,9 +81,43 @@ $app->get('/menus', function() use($app) {
             $data['dt_end'] = dateParse($data['dt_end']);
 
             $repository = $app->service('menu.repository');
-            $repository->update([
-                'id' => $id,
-                    ], $data);
+            try {
+                $repository->update([
+                    'id' => $id,
+                        ], $data);
+            } catch (ValidatorException $exc) {
+
+                $view = $app->service('view.renderer');
+                $repository = $app->service('menu.repository');
+                $menu = $repository->findOneBy([
+                    'id' => $id,
+                ]);
+
+                return $view->render('menus/edit.html.twig', [
+                            'menu' => $menu,
+                            'types' => Menu::getTypes(),
+                            'errors' => $exc->getErrorMessages()
+                                ]
+                );
+            } catch (\Exception $exc) {
+                $view = $app->service('view.renderer');
+                $repository = $app->service('menu.repository');
+                $menu = $repository->findOneBy([
+                    'id' => $id,
+                ]);
+
+                return $view->render(
+                                'menus/edit.html.twig', [
+                            'types' => Menu::getTypes(),
+                            'menu' => $menu,
+                            'errors' => [
+                                'erro' => [
+                                    0 => 'Algo não saiu como esperado. Contate o suporte informando o erro - ' . $exc->getCode()
+                                ]
+                            ]
+                ]);
+            }
+
 
             return $app->redirect('/menus');
         }, 'menus.update')

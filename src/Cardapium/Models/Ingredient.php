@@ -2,9 +2,10 @@
 
 namespace Cardapium\Models;
 
+use Cardapium\Models\Validators\FillableValidatorInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Ingredient extends Model
+class Ingredient extends Model implements FillableValidatorInterface
 {
 
     // Mass Assignment
@@ -16,6 +17,16 @@ class Ingredient extends Model
     public function ingredientTypes()
     {
         return $this->belongsTo(IngredientType::class, 'ingredient_type_id');
+    }
+
+    public function prepareFillableValidators()
+    {
+
+    }
+
+    public function getFillableValidators()
+    {
+
     }
 
 }

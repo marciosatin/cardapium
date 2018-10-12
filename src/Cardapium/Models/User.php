@@ -2,10 +2,11 @@
 
 namespace Cardapium\Models;
 
+use Cardapium\Models\Validators\FillableValidatorInterface;
 use Illuminate\Database\Eloquent\Model;
-use \Jasny\Auth\User as JasnyUser;
+use Jasny\Auth\User as JasnyUser;
 
-class User extends Model implements JasnyUser, UserInterface
+class User extends Model implements JasnyUser, UserInterface, FillableValidatorInterface
 {
 
     //Mass Assignment
@@ -15,6 +16,7 @@ class User extends Model implements JasnyUser, UserInterface
         'email',
         'password'
     ];
+    protected $fillableValidators = [];
 
     /**
      * Get user id
@@ -79,6 +81,16 @@ class User extends Model implements JasnyUser, UserInterface
     public function getPassword(): string
     {
         return $this->password;
+    }
+
+    public function getFillableValidators()
+    {
+        return $this->fillableValidators;
+    }
+
+    public function prepareFillableValidators()
+    {
+
     }
 
 }
