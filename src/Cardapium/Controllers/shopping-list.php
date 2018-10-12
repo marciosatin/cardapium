@@ -24,6 +24,7 @@ $app
             'itens' => $itens,
             'menus' => $repositoryMenu->all(),
             'dtInicio' => $dtInicio,
-            'dtFim' => $dtFim
+            'dtFim' => $dtFim,
+            'menu_id' => $menuId,
         ]);
     }, 'shopping-list.list');

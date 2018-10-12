@@ -19,7 +19,7 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
             ];
 
             $repositoryItem = $app->service('menu-item.repository');
-            $items = $repositoryItem->findByField('menu_id', $menu->id);
+            $items = $repositoryItem->findByField('menu_id', $menu->id)->sortBy('dt_week');
 
             foreach ($items as $item) {
                 $item->dt_ext = ucfirst(gmstrftime('%A', strtotime($item->dt_week)));
