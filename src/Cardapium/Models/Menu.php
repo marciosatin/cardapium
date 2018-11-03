@@ -27,7 +27,7 @@ class Menu extends Model implements FillableValidatorInterface
         return $this->fillableValidators;
     }
 
-    public function prepareFillableValidators()
+    public function prepareFillableValidators(array $options = [])
     {
         $this->fillableValidators = [
             'name' => [

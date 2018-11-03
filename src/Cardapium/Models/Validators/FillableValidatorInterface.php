@@ -11,5 +11,5 @@ interface FillableValidatorInterface
 
     public function getFillableValidators();
 
-    public function prepareFillableValidators();
+    public function prepareFillableValidators(array $options = []);
 }

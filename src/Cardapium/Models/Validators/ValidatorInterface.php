@@ -8,5 +8,5 @@ namespace Cardapium\Models\Validators;
  */
 interface ValidatorInterface
 {
-    public function validate(array $data);
+    public function validate(array $data = [], array $options = []);
 }

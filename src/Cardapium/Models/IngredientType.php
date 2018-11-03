@@ -18,7 +18,7 @@ class IngredientType extends Model implements FillableValidatorInterface
         
     }
 
-    public function prepareFillableValidators()
+    public function prepareFillableValidators(array $options = [])
     {
 
     }

@@ -19,7 +19,7 @@ class Ingredient extends Model implements FillableValidatorInterface
         return $this->belongsTo(IngredientType::class, 'ingredient_type_id');
     }
 
-    public function prepareFillableValidators()
+    public function prepareFillableValidators(array $options = [])
     {
 
     }

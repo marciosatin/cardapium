@@ -4,9 +4,9 @@ declare(strict_types = 1);
 
 namespace Cardapium\Repository;
 
-use Illuminate\Database\Eloquent\Model;
 use Cardapium\Models\Validators\ValidatorException;
 use Cardapium\Models\Validators\ValidatorInterface;
+use Illuminate\Database\Eloquent\Model;
 
 class DefaultRepository implements RepositoryInterface, ValidatorInterface
 {
@@ -50,7 +50,7 @@ class DefaultRepository implements RepositoryInterface, ValidatorInterface
     {
         $model = $this->findInternal($id);
         $model->fill($data);
-        $this->validate($data);
+        $this->validate($data, ['idExclude' => $id]);
         $model->save();
         return $model;
     }
@@ -76,9 +76,9 @@ class DefaultRepository implements RepositoryInterface, ValidatorInterface
         return $queryBuilder->firstOrFail();
     }
 
-    public function validate(array $data)
+    public function validate(array $data = [], array $options = [])
     {
-        $this->_model->prepareFillableValidators();
+        $this->_model->prepareFillableValidators($options);
         
         $fields = $this->_model->getFillableValidators();
         if (!is_array($fields)) {

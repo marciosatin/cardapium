@@ -3,8 +3,9 @@
 namespace Cardapium\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cardapium\Models\Validators\FillableValidatorInterface;
 
-class MenuItem extends Model
+class MenuItem extends Model implements FillableValidatorInterface
 {
 
     // Mass Assignment
@@ -18,6 +19,16 @@ class MenuItem extends Model
     public function meals()
     {
         return $this->belongsTo(Meal::class, 'meal_id');
+    }
+
+    public function prepareFillableValidators(array $options = [])
+    {
+
+    }
+
+    public function getFillableValidators()
+    {
+
     }
     
 }

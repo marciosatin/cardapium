@@ -1,5 +1,6 @@
 <?php
 
+use Cardapium\Models\Validators\ValidatorException;
 use Psr\Http\Message\ServerRequestInterface;
 
 $app->get('/meals', function() use($app) {
@@ -22,7 +23,16 @@ $app->get('/meals', function() use($app) {
         ->post('/meals/store', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
             $repository = $app->service('meal.repository');
-            $model = $repository->create($data);
+            try {
+                $model = $repository->create($data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render(
+                                'meals/create.html.twig', [
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            }
+
             return $app->redirect('/meals-itens/' . $model->id . '/add');
         }, 'meals.store')
         ->get('/meals/{id}/edit', function(ServerRequestInterface $request) use($app) {

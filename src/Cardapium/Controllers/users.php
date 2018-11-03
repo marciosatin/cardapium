@@ -1,5 +1,6 @@
 <?php
 
+use Cardapium\Models\Validators\ValidatorException;
 use Psr\Http\Message\ServerRequestInterface;
 
 $app->get(
@@ -22,7 +23,21 @@ $app->get(
             $auth = $app->service('auth');
             $data['password'] = $auth->hashPassword($data['password']);
             $repository = $app->service('user.repository');
-            $repository->create($data);
+            try {
+                $repository->create($data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render('users/create.html.twig', [
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\Exception $exc) {
+                $msg = 'Ops. Algo não saiu como esperado: ' . $exc->getCode();
+                $view = $app->service('view.renderer');
+                return $view->render('users/create.html.twig', [
+                            'errors' => [[$msg]]
+                ]);
+            }
+
             return $app->redirect('/users');
         }, 'users.store')
         ->get(
@@ -43,7 +58,34 @@ $app->get(
             if (isset($data['password'])) {
                 unset($data['password']);
             }
-            $repository->update($id, $data);
+            try {
+                $repository->update($id, $data);
+            } catch (ValidatorException $exc) {
+
+                $view = $app->service('view.renderer');
+                $repository = $app->service('user.repository');
+                $user = $repository->find($id);
+                
+                return $view->render('users/edit.html.twig', [
+                            'user' => $user,
+                            'errors' => $exc->getErrorMessages(),
+                ]);
+            } catch (\Exception $exc) {
+
+                $msg = 'Ops. Algo não saiu como esperado ' . $exc->getCode();
+
+                $view = $app->service('view.renderer');
+                $repository = $app->service('user.repository');
+                $user = $repository->findOneBy([
+                    'id' => $id,
+                ]);
+
+                return $view->render('users/edit.html.twig', [
+                            'user' > $user,
+                            'errors' => [[$msg]],
+                ]);
+            }
+
             return $app->route('users.list');
         }, 'users.update')
         ->get(

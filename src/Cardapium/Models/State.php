@@ -2,9 +2,10 @@
 
 namespace Cardapium\Models;
 
+use Cardapium\Models\Validators\FillableValidatorInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class State extends Model
+class State extends Model implements FillableValidatorInterface
 {
 
     // Mass Assignment
@@ -12,5 +13,15 @@ class State extends Model
         'id',
         'name',
     ];
+
+    public function prepareFillableValidators(array $options = [])
+    {
+
+    }
+
+    public function getFillableValidators()
+    {
+
+    }
 
 }

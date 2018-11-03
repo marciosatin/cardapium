@@ -3,8 +3,10 @@
 namespace Cardapium\Models;
 
 use Cardapium\Models\Validators\FillableValidatorInterface;
+use Cardapium\Models\Validators\NoRecordExists;
 use Illuminate\Database\Eloquent\Model;
 use Jasny\Auth\User as JasnyUser;
+use Zend\Validator\NotEmpty;
 
 class User extends Model implements JasnyUser, UserInterface, FillableValidatorInterface
 {
@@ -26,6 +28,11 @@ class User extends Model implements JasnyUser, UserInterface, FillableValidatorI
     public function getId(): int
     {
         return (int) $this->id;
+    }
+
+    public function setId(int $id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -88,9 +95,44 @@ class User extends Model implements JasnyUser, UserInterface, FillableValidatorI
         return $this->fillableValidators;
     }
 
-    public function prepareFillableValidators()
+    public function prepareFillableValidators(array $options = [])
     {
 
+        $noRecordOpt = [
+            'table' => User::class,
+            'field' => 'email'
+        ];
+
+        if (isset($options['idExclude'])) {
+            $noRecordOpt['exclude'] = [
+                'excludeField' => 'id',
+                'excludeValue' => (int) $options['idExclude']
+            ];
+        }
+
+        $this->fillableValidators = [
+            'first_name' => [
+                'validators' => [
+                    (new NotEmpty)->setMessage('Primeiro nome não pode ser vazio')
+                ]
+            ],
+            'last_name' => [
+                'validators' => [
+                    (new NotEmpty)->setMessage('Segundo nome não pode ser vazio')
+                ]
+            ],
+            'email' => [
+                'validators' => [
+                    (new NotEmpty)->setMessage('Data inicial não pode ser vazio'),
+                    (new NoRecordExists($noRecordOpt))
+                ]
+            ],
+            'password' => [
+                'validators' => [
+                    (new NotEmpty)->setMessage('Data final não pode ser vazio')
+                ]
+            ],
+        ];
     }
 
 }
