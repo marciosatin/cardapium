@@ -1,5 +1,6 @@
 <?php
 
+use Cardapium\Models\Validators\ValidatorException;
 use Psr\Http\Message\ServerRequestInterface;
 
 $app->get(
@@ -20,7 +21,21 @@ $app->get(
                 '/states/store', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
             $repository = $app->service('state.repository');
-            $repository->create($data);
+            try {
+                $repository->create($data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render('states/create.html.twig', [
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\Exception $exc) {
+                $msg = 'Ops. Algo não saiu como esperado ' . $exc->getCode();
+                $view = $app->service('view.renderer');
+                return $view->render('states/create.html.twig', [
+                            'errors' => [[$msg]]
+                ]);
+            }
+
             return $app->redirect('/states');
         }, 'states.store')
         ->get(
@@ -38,7 +53,29 @@ $app->get(
             $repository = $app->service('state.repository');
             $id = (int) $request->getAttribute('id');
             $data = $request->getParsedBody();
-            $repository->update($id, $data);
+            try {
+                $repository->update($id, $data);
+            } catch (ValidatorException $exc) {
+                $state = $repository->find($id);
+                $view = $app->service('view.renderer');
+                $repository = $app->service('state.repository');
+                return $view->render('states/edit.html.twig', [
+                            'state' => $state,
+                            'errors' => $exc->getErrorMessages()
+                                ]
+                );
+            } catch (\Exception $exc) {
+                $msg = 'Ops. Algo não saiu como esperado ' . $exc->getCode();
+                $state = $repository->find($id);
+                $view = $app->service('view.renderer');
+                $repository = $app->service('state.repository');
+                return $view->render('states/edit.html.twig', [
+                            'state' => $state,
+                            'errors' => [[$msg]]
+                                ]
+                );
+            }
+
             return $app->route('states.list');
         }, 'states.update')
         ->get(

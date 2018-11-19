@@ -5,17 +5,17 @@ namespace Cardapium\Models\Validators;
 use Zend\Validator\AbstractValidator;
 
 /**
- * Description of NoRecordExists
+ * Description of RecordExists
  *
  * @author Marcio
  */
-class NoRecordExists extends AbstractValidator
+class RecordExists extends AbstractValidator
 {
 
-    const RECORD_EXISTS = 'recordExists';
+    const NO_RECORD_EXISTS = 'noRecordExists';
 
     protected $messageTemplates = [
-        self::RECORD_EXISTS => '%value% já existe cadastrado'
+        self::NO_RECORD_EXISTS => 'Não foi encontrado registro para %value%'
     ];
     protected $table;
     protected $field;
@@ -44,8 +44,8 @@ class NoRecordExists extends AbstractValidator
         if ((null !== $this->excludeField) and (null !== $this->excludeValue)) {
             $model->where($this->excludeField, '!=', $this->excludeValue);
         }
-        if ($model->get()->count() > 0) {
-            $this->error(self::RECORD_EXISTS, $value);
+        if ($model->get()->count() == 0) {
+            $this->error(self::NO_RECORD_EXISTS, $value);
             return false;
         }
         return true;

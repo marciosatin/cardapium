@@ -1,5 +1,6 @@
 <?php
 
+use Cardapium\Models\Validators\ValidatorException;
 use Psr\Http\Message\ServerRequestInterface;
 
 $app->get('/ingredients', function() use($app) {
@@ -7,7 +8,7 @@ $app->get('/ingredients', function() use($app) {
             $repository = $app->service('ingredient.repository');
             $ingredients = $repository->all();
             return $view->render('ingredients/list.html.twig', [
-                    'ingredients' => $ingredients
+                        'ingredients' => $ingredients
             ]);
         }, 'ingredients.list')
         ->get('/ingredients/new', function() use($app) {
@@ -15,7 +16,7 @@ $app->get('/ingredients', function() use($app) {
             $ingredientTypeRepo = $app->service('ingredient-type.repository');
             $types = $ingredientTypeRepo->all();
             return $view->render(
-                        'ingredients/create.html.twig', [
+                            'ingredients/create.html.twig', [
                         'types' => $types
             ]);
         }, 'ingredients.new')
@@ -25,11 +26,28 @@ $app->get('/ingredients', function() use($app) {
             $repository = $app->service('ingredient.repository');
             $ingredientTypeRepo = $app->service('ingredient-type.repository');
 
-            $data['ingredient_type_id'] = $ingredientTypeRepo->findOneBy([
-                        'id' => $data['ingredient_type_id'],
-                    ])->id;
+            try {
+                $data['ingredient_type_id'] = $ingredientTypeRepo->findOneBy([
+                            'id' => $data['ingredient_type_id'],
+                        ])->id;
+                $repository->create($data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                $types = $ingredientTypeRepo->all();
+                return $view->render('ingredients/create.html.twig', [
+                            'types' => $types,
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\Exception $exc) {
+                $view = $app->service('view.renderer');
+                $types = $ingredientTypeRepo->all();
+                $msg = 'Ops. Algo não saiu como esperado: ' . $exc->getCode();
+                return $view->render('ingredients/create.html.twig', [
+                            'types' => $types,
+                            'errors' => [[$msg]]
+                ]);
+            }
 
-            $repository->create($data);
             return $app->redirect('/ingredients');
         }, 'ingredients.store')
         ->get('/ingredients/{id}/edit', function(ServerRequestInterface $request) use($app) {
@@ -56,13 +74,33 @@ $app->get('/ingredients', function() use($app) {
             $repository = $app->service('ingredient.repository');
             $ingredientTypeRepo = $app->service('ingredient-type.repository');
 
-            $data['ingredient_type_id'] = $ingredientTypeRepo->findOneBy([
-                        'id' => $data['ingredient_type_id'],
-                    ])->id;
-
-            $repository->update([
+            $ingredient = $repository->findOneBy([
                 'id' => $id,
-                    ], $data);
+            ]);
+
+            try {
+                $data['ingredient_type_id'] = $ingredientTypeRepo->findOneBy([
+                            'id' => $data['ingredient_type_id'],
+                        ])->id;
+                $repository->update($id, $data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                $types = $ingredientTypeRepo->all();
+                return $view->render('ingredients/edit.html.twig', [
+                            'types' => $types,
+                            'ingredient' => $ingredient,
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\Exception $exc) {
+                $view = $app->service('view.renderer');
+                $types = $ingredientTypeRepo->all();
+                $msg = 'Ops. Algo não saiu como esperado: ' . $exc->getCode();
+                return $view->render('ingredients/edit.html.twig', [
+                            'types' => $types,
+                            'ingredient' => $ingredient,
+                            'errors' => [[$msg]]
+                ]);
+            }
 
             return $app->redirect('/ingredients');
         }, 'ingredients.update')

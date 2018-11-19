@@ -123,15 +123,10 @@ class User extends Model implements JasnyUser, UserInterface, FillableValidatorI
             ],
             'email' => [
                 'validators' => [
-                    (new NotEmpty)->setMessage('Data inicial não pode ser vazio'),
+                    (new NotEmpty)->setMessage('E-mail não pode ser vazio'),
                     (new NoRecordExists($noRecordOpt))
                 ]
-            ],
-            'password' => [
-                'validators' => [
-                    (new NotEmpty)->setMessage('Data final não pode ser vazio')
-                ]
-            ],
+            ]
         ];
     }
 

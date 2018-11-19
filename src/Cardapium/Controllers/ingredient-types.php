@@ -1,5 +1,6 @@
 <?php
 
+use Cardapium\Models\Validators\ValidatorException;
 use Psr\Http\Message\ServerRequestInterface;
 
 $app->get(
@@ -20,7 +21,21 @@ $app->get(
                 '/ingredient-types/store', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
             $repository = $app->service('ingredient-type.repository');
-            $repository->create($data);
+            try {
+                $repository->create($data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render('ingredient-types/create.html.twig', [
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\Exception $exc) {
+                $msg = 'Ops. Algo não saiu como esperado: ' . $exc->getCode();
+                $view = $app->service('view.renderer');
+                return $view->render('ingredient-types/create.html.twig', [
+                            'errors' => [[$msg]]
+                ]);
+            }
+
             return $app->redirect('/ingredient-types');
         }, 'ingredient-types.store')
         ->get(
@@ -38,7 +53,32 @@ $app->get(
             $repository = $app->service('ingredient-type.repository');
             $id = (int) $request->getAttribute('id');
             $data = $request->getParsedBody();
-            $repository->update($id, $data);
+            try {
+                $repository->update($id, $data);
+            } catch (ValidatorException $exc) {
+
+                $view = $app->service('view.renderer');
+                $repository = $app->service('ingredient-type.repository');
+                $ingredientType = $repository->find($id);
+
+                return $view->render('ingredient-types/edit.html.twig', [
+                            'type' => $ingredientType,
+                            'errors' => $exc->getErrorMessages(),
+                ]);
+            } catch (\Exception $exc) {
+
+                $msg = 'Ops. Algo não saiu como esperado ' . $exc->getCode();
+
+                $view = $app->service('view.renderer');
+                $repository = $app->service('ingredient-type.repository');
+                $ingredientType = $repository->find($id);
+
+                return $view->render('ingredient-types/edit.html.twig', [
+                            'type' => $ingredientType,
+                            'errors' => [[$msg]],
+                ]);
+            }
+
             return $app->route('ingredient-types.list');
         }, 'ingredient-types.update')
         ->get(

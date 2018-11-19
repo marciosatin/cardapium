@@ -21,14 +21,20 @@ $app->get(
                 '/users/store', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
             $auth = $app->service('auth');
-            $data['password'] = $auth->hashPassword($data['password']);
             $repository = $app->service('user.repository');
             try {
+                $data['password'] = $auth->hashPassword($data['password']);
                 $repository->create($data);
             } catch (ValidatorException $exc) {
                 $view = $app->service('view.renderer');
                 return $view->render('users/create.html.twig', [
                             'errors' => $exc->getErrorMessages()
+                ]);
+            } catch (\InvalidArgumentException $exc) {
+                $msg = 'Senha deve ser informada';
+                $view = $app->service('view.renderer');
+                return $view->render('users/create.html.twig', [
+                            'errors' => [[$msg]]
                 ]);
             } catch (\Exception $exc) {
                 $msg = 'Ops. Algo não saiu como esperado: ' . $exc->getCode();
@@ -65,7 +71,7 @@ $app->get(
                 $view = $app->service('view.renderer');
                 $repository = $app->service('user.repository');
                 $user = $repository->find($id);
-                
+
                 return $view->render('users/edit.html.twig', [
                             'user' => $user,
                             'errors' => $exc->getErrorMessages(),
