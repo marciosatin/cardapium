@@ -50,9 +50,22 @@ $app->get('/meals', function() use($app) {
             $data = $request->getParsedBody();
 
             $repository = $app->service('meal.repository');
-            $repository->update([
-                'id' => $id,
-                    ], $data);
+            
+            try {
+                $meal = $repository->findOneBy([
+                    'id' => $id,
+                ]);
+                $repository->update([
+                    'id' => $id,
+                        ], $data);
+            } catch (ValidatorException $exc) {
+                $view = $app->service('view.renderer');
+                return $view->render(
+                                'meals/edit.html.twig', [
+                            'meal' => $meal,
+                            'errors' => $exc->getErrorMessages()
+                ]);
+            }
 
             return $app->redirect('/meals');
         }, 'meals.update')

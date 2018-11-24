@@ -92,12 +92,12 @@ class Application
     public function start()
     {
         $route = $this->service('route');
+        if (!$route) {
+            $response = $this->route('error.404');
+            $this->emitResponse($response);
+        }
         /** @var ServerRequestInterface $request */
         $request = $this->service(RequestInterface::class);
-        if (!$route) {
-            echo 'Page not found!';
-            exit;
-        }
 
         $result = $this->runBefores();
         if ($result) {
@@ -118,12 +118,11 @@ class Application
     {
         return new JsonResponse($data);
     }
-    
+
     protected function emitResponse(ResponseInterface $response)
     {
         $emitter = new SapiEmitter();
         $emitter->emit($response);
     }
-
 
 }

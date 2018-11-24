@@ -36,8 +36,17 @@ class RoutePlugin implements PluginInterface
 
     protected function getRequest(): RequestInterface
     {
+        $this->replaceUri();
         return ServerRequestFactory::fromGlobals(
             $_SERVER, $_GET, $_POST, $_COOKIE, $_FILES
         );
+    }
+
+    private function replaceUri(): void
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+        if (strlen($uri) > 1) {
+            $_SERVER['REQUEST_URI'] = rtrim($uri, '/');
+        }
     }
 }

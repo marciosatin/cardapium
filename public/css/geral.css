@@ -29,3 +29,10 @@ table label input[type=checkbox] {
     height: 150px;
     margin-bottom: 5px;
 }
+
+/**
+* Error 404
+**/
+.error-template {
+    text-align: center;
+}
