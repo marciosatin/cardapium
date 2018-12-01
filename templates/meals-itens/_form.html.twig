@@ -26,9 +26,9 @@
         <label class="control-label">Tipo</label>
         <select class="form-control"
                 name="type_id">
-            {%  for type in types %}
-                <option value="{{ type.id }}">
-                    {{ type.name }}
+            {%  for id, type in types %}
+                <option value="{{ id }}">
+                    {{ type }}
                 </option>
             {% endfor %}            
         </select>
@@ -36,7 +36,7 @@
     <div class="form-group">
         <label class="control-label">Quantidade</label>
         <input class="form-control" type="text" placeholder="Quantidade"
-               name="quantity">
+               name="quantity" value="1">
     </div>   
     <button type="submit" class="btn btn-primary btn-block">
         Adicionar
