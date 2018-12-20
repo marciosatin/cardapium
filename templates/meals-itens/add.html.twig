@@ -24,6 +24,14 @@
                                         <th scope="row">Refeição</th>
                                         <td>{{ meal.name }}</td>
                                     </tr>
+                                    <tr>
+                                        <th scope="row">Receita</th>
+                                        {% if meal.meal_recipe_link %}
+                                        <td><a target="_blank" href="//{{meal.meal_recipe_link}}">Ir para receita</a></td>
+                                        {% else %}
+                                        <td>Não há link</td>
+                                        {% endif %}
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

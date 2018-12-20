@@ -6,6 +6,9 @@ use Cardapium\Models\Validators\FillableValidatorInterface;
 use Cardapium\Models\Validators\NoRecordExists;
 use Cardapium\Models\Validators\RecordExists;
 use Illuminate\Database\Eloquent\Model;
+use Zend\Filter\StringTrim;
+use Zend\Filter\ToInt;
+use Zend\Filter\ToNull;
 use Zend\Validator\NotEmpty;
 
 class Ingredient extends Model implements FillableValidatorInterface
@@ -44,12 +47,20 @@ class Ingredient extends Model implements FillableValidatorInterface
 
         $this->fillableValidators = [
             'name' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Nome não pode ser vazio'),
                     (new NoRecordExists($noRecordOpt))
                 ]
             ],
             'ingredient_type_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Tipo não pode ser vazio'),
                     (new RecordExists($recordOpt))

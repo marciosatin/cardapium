@@ -5,6 +5,9 @@ namespace Cardapium\Models;
 use Cardapium\Models\Validators\FillableValidatorInterface;
 use Cardapium\Models\Validators\RecordExists;
 use Illuminate\Database\Eloquent\Model;
+use Zend\Filter\StringTrim;
+use Zend\Filter\ToInt;
+use Zend\Filter\ToNull;
 use Zend\Validator\InArray;
 use Zend\Validator\NotEmpty;
 
@@ -45,12 +48,20 @@ class MenuItem extends Model implements FillableValidatorInterface
     {
         $this->fillableValidators = [
             'meal_split_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new InArray(['haystack' => array_keys(self::getTypes())]))
                             ->setMessage('Tipo não esperado')
                 ]
             ],
             'meal_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Refeição não pode ser vazio'),
                     new RecordExists([
@@ -60,6 +71,10 @@ class MenuItem extends Model implements FillableValidatorInterface
                 ]
             ],
             'menu_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Menu não pode ser vazio'),
                     new RecordExists([
@@ -69,6 +84,10 @@ class MenuItem extends Model implements FillableValidatorInterface
                 ]
             ],
             'dt_week' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Dia não pode ser vazio')
                 ]

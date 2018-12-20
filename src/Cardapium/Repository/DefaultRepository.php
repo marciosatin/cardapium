@@ -41,18 +41,18 @@ class DefaultRepository implements RepositoryInterface, ValidatorInterface
     public function create(array $data)
     {
         $this->_model->fill($data);
-        $this->validate($data);
+        $this->validate();
         $this->_model->save();
         return $this->_model;
     }
 
     public function update($id, array $data)
     {
-        $model = $this->findInternal($id);
-        $model->fill($data);
-        $this->validate($data, ['idExclude' => $id]);
-        $model->save();
-        return $model;
+        $this->_model = $this->findInternal($id);
+        $this->_model->fill($data);
+        $this->validate(['idExclude' => $id]);
+        $this->_model->save();
+        return $this->_model;
     }
 
     public function delete($id)
@@ -76,23 +76,33 @@ class DefaultRepository implements RepositoryInterface, ValidatorInterface
         return $queryBuilder->firstOrFail();
     }
 
-    public function validate(array $data = [], array $options = [])
+    public function validate(array $options = [])
     {
         $this->_model->prepareFillableValidators($options);
-        
+
         $fields = $this->_model->getFillableValidators();
         if (!is_array($fields)) {
             return true;
         }
 
-        $data = (object) $data;
-
         $errors = [];
         foreach ($fields as $field => $value) {
-            if (isset($value['validators']) and isset($data->$field)) {
+
+            if (!isset($this->_model->$field)) {
+                continue;
+            }
+
+            if (isset($value['filters'])) {
+                $filters = $value['filters'];
+                foreach ($filters as $filter) {
+                    $this->_model->$field = $filter->filter($this->_model->$field);
+                }
+            }
+
+            if (isset($value['validators'])) {
                 $validators = $value['validators'];
                 foreach ($validators as $validator) {
-                    if (!$validator->isValid($data->$field)) {
+                    if (!$validator->isValid($this->_model->$field)) {
                         if (!isset($errors[$field])) {
                             $errors[$field] = [];
                         }

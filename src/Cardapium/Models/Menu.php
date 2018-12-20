@@ -4,6 +4,9 @@ namespace Cardapium\Models;
 
 use Cardapium\Models\Validators\FillableValidatorInterface;
 use Illuminate\Database\Eloquent\Model;
+use Zend\Filter\StringTrim;
+use Zend\Filter\ToInt;
+use Zend\Filter\ToNull;
 use Zend\Validator\InArray;
 use Zend\Validator\NotEmpty;
 
@@ -31,22 +34,38 @@ class Menu extends Model implements FillableValidatorInterface
     {
         $this->fillableValidators = [
             'name' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Nome não pode ser vazio')
                 ]
             ],
             'type_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new InArray(['haystack' => array_keys(self::getTypes())]))
                             ->setMessage('Tipo não esperado')
                 ]
             ],
             'dt_start' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Data inicial não pode ser vazio')
                 ]
             ],
             'dt_end' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Data final não pode ser vazio')
                 ]

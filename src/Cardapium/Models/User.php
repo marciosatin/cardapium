@@ -6,6 +6,9 @@ use Cardapium\Models\Validators\FillableValidatorInterface;
 use Cardapium\Models\Validators\NoRecordExists;
 use Illuminate\Database\Eloquent\Model;
 use Jasny\Auth\User as JasnyUser;
+use Zend\Filter\StringTrim;
+use Zend\Filter\ToNull;
+use Zend\Validator\EmailAddress;
 use Zend\Validator\NotEmpty;
 
 class User extends Model implements JasnyUser, UserInterface, FillableValidatorInterface
@@ -112,18 +115,31 @@ class User extends Model implements JasnyUser, UserInterface, FillableValidatorI
 
         $this->fillableValidators = [
             'first_name' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Primeiro nome não pode ser vazio')
                 ]
             ],
             'last_name' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Segundo nome não pode ser vazio')
                 ]
             ],
             'email' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('E-mail não pode ser vazio'),
+                    (new EmailAddress())->setMessage('O e-mail informado não é válido'),
                     (new NoRecordExists($noRecordOpt))
                 ]
             ]

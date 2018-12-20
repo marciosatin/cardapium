@@ -5,6 +5,8 @@ namespace Cardapium\Models;
 use Cardapium\Models\Validators\FillableValidatorInterface;
 use Cardapium\Models\Validators\RecordExists;
 use Illuminate\Database\Eloquent\Model;
+use Zend\Filter\ToInt;
+use Zend\Filter\ToNull;
 use Zend\Validator\GreaterThan;
 use Zend\Validator\InArray;
 use Zend\Validator\NotEmpty;
@@ -52,6 +54,10 @@ class MealsIten extends Model implements FillableValidatorInterface
     {
         $this->fillableValidators = [
             'ingredient_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Tipo de ingrediente não pode ser vazio'),
                     new RecordExists([
@@ -61,12 +67,20 @@ class MealsIten extends Model implements FillableValidatorInterface
                 ]
             ],
             'type_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                             (new InArray(['haystack' => array_keys(self::getTypes())]))
                             ->setMessage('Tipo não esperado')
                 ]
             ],
             'state_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Estado não pode ser vazio'),
                     new RecordExists([
@@ -76,6 +90,10 @@ class MealsIten extends Model implements FillableValidatorInterface
                 ]
             ],
             'meal_id' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Refeição não pode ser vazio'),
                     new RecordExists([
@@ -85,6 +103,10 @@ class MealsIten extends Model implements FillableValidatorInterface
                 ]
             ],
             'quantity' => [
+                'filters' => [
+                    new ToInt(),
+                    new ToNull(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Quantidade não pode ser vazio'),
                     (new GreaterThan(0))->setMessage('Quantidade deve ser maior que 0'),

@@ -38,6 +38,10 @@ class State extends Model implements FillableValidatorInterface
 
         $this->fillableValidators = [
             'name' => [
+                'filters' => [
+                    new ToNull(),
+                    new StringTrim(),
+                ],
                 'validators' => [
                     (new NotEmpty)->setMessage('Nome não pode ser vazio'),
                     (new NoRecordExists($noRecordOpt))

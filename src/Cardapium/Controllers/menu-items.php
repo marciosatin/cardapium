@@ -20,7 +20,6 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
                     'data' => $data
                 ]);
             } catch (Exception $exc) {
-                die('<pre>' . print_r($exc, true) . " File: " . __FILE__ . " Linha: " . __LINE__ . '</pre>');
                 return addMenuItens($request, $app, [
                     'data' => $data,
                     'errors' => [[
