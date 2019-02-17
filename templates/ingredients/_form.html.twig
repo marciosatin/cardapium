@@ -1,22 +1,26 @@
 <form method="post" action="{{ action }}">
     <div class="form-group">
-        <label class="control-label">Tipo</label>
-        <select class="form-control" value="{{ ingredient.ingredient_type_id }}"
-                name="ingredient_type_id">
-            {%  for type in types %}
-                <option value="{{ type.id }}"
-                        {{ ingredient.ingredient_type_id is not null and ingredient.ingredient_type_id == type.id ? 'selected="selected"' : '' }}>
-                    {{ type.name }}
-                </option>
-            {% endfor %}            
-        </select>
+        <div class="nk-int-st">
+            <label class="control-label">Tipo</label>
+            <select class="form-control" value="{{ ingredient.ingredient_type_id }}"
+                    name="ingredient_type_id">
+                {%  for type in types %}
+                    <option value="{{ type.id }}"
+                            {{ ingredient.ingredient_type_id is not null and ingredient.ingredient_type_id == type.id ? 'selected="selected"' : '' }}>
+                        {{ type.name }}
+                    </option>
+                {% endfor %}            
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Nome</label>
-        <input class="form-control" type="text" placeholder="Nome"
-               name="name" value="{{ ingredient.name }}">
+        <div class="nk-int-st">
+            <label class="control-label">Nome</label>
+            <input class="form-control" type="text" placeholder="Nome"
+                   name="name" value="{{ ingredient.name }}">
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">
+    <button type="submit" class="btn btn-primary notika-btn-primary btn-block">
         <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
     </button>
 </form>

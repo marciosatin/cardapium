@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Login
@@ -12,16 +12,20 @@
                 <div class="panel-body">
                     <form method="post" action="{{ route('auth.login') }}">
                         <div class="form-group">
-                            <label class="control-label">E-mail</label>
-                            <input class="form-control" type="text" placeholder="E-mail"
-                                   name="email">
+                            <div class="nk-int-st">
+                                <label class="control-label">E-mail</label>
+                                <input class="form-control" type="text" placeholder="E-mail"
+                                       name="email">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Password</label>
-                            <input class="form-control" type="password" placeholder="Senha"
-                                   name="password">
+                            <div class="nk-int-st">
+                                <label class="control-label">Password</label>
+                                <input class="form-control" type="password" placeholder="Senha"
+                                       name="password">
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        <button type="submit" class="btn btn-primary notika-btn-primary btn-block">Login</button>
                     </form>
                 </div>
             </div>

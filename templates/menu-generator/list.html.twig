@@ -3,20 +3,20 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Cardápio [ <span class="dtIni" data-dtini="{{ dtIni }}">{{ dtIni | date('d/m/Y') }}</span> - <span class="dtFin" data-dtfin="{{ dtFin }}">{{ dtFin | date('d/m/Y') }}</span> ] gerado em {{ "now"|date("d/m/Y") }}
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
+                    <div class="basic-tb-hd">
+                        <h2>
+                            Cardápio [ <span class="dtIni" data-dtini="{{ dtIni }}">{{ dtIni | date('d/m/Y') }}</span> - <span class="dtFin" data-dtfin="{{ dtFin }}">{{ dtFin | date('d/m/Y') }}</span> ] gerado em {{ "now"|date("d/m/Y") }}
+                        </h2>
+                        <div class="menu-right">
                             <a href="javascript:;" class="btn btn-default refresh" title="Gerar novamente">
                                 <span class="glyphicon glyphicon-refresh"></span>
                             </a>
                         </div>
                     </div>
+                </div>
+                <div class="panel-body">
                     <div class="row">
                         {% for head in headers %}
                             <div class="head-week-day">
@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <button class="btn btn-primary btn-salvar">Salvar</button>
+                    <button class="btn btn-primary notika-btn-primary btn-salvar">Salvar</button>
                 </div>
             </div>
         </div>

@@ -1,17 +1,21 @@
 <form method="post" action="{{ action }}">
     <div class="form-group">
-        <label class="control-label">Nome</label>
-        <input class="form-control" type="text" placeholder="Nome"
-               name="name" value="{{ meal.name }}">
-    </div>
-    <div class="form-group">
-        <label for="basic-url">Link para receita</label>
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon3">https://</span>
-            <input type="text" class="form-control" id="basic-url" name="meal_recipe_link" value="{{ meal.meal_recipe_link }}" aria-describedby="basic-addon3" placeholder="Link sem o http ou https">
+        <div class="nk-int-st">
+            <label class="control-label">Nome</label>
+            <input class="form-control" type="text" placeholder="Nome"
+                   name="name" value="{{ meal.name }}">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">
+    <div class="form-group">
+        <div class="nk-int-st">
+            <label for="basic-url">Link para receita</label>
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon3">https://</span>
+                <input type="text" class="form-control" id="basic-url" name="meal_recipe_link" value="{{ meal.meal_recipe_link }}" aria-describedby="basic-addon3" placeholder="Link sem o http ou https">
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary notika-btn-primary btn-block">
         Avançar
         <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
     </button>

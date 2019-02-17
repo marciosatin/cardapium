@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Gerador de cardápio
@@ -12,14 +12,18 @@
                 <div class="panel-body">
                     <form class="form-inline text-center" method="post" action="{{ route('menu-generator.list') }}">
                         <div class="form-group">
-                            <label class="control-label">Início</label>
-                            <input class="form-control" type="date" placeholder="DD/MM/YYY"
-                                   name="dtInicio" value="{{ dtInicio }}">
+                            <div class="nk-int-st">
+                                <label class="control-label">Início</label>
+                                <input class="form-control" type="date" placeholder="DD/MM/YYY"
+                                       name="dtInicio" value="{{ dtInicio }}">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label">Fim</label>
-                            <input class="form-control" type="date" placeholder="DD/MM/YYY"
-                                   name="dtFim" value="{{ dtFim }}">
+                            <div class="nk-int-st">
+                                <label class="control-label">Fim</label>
+                                <input class="form-control" type="date" placeholder="DD/MM/YYY"
+                                       name="dtFim" value="{{ dtFim }}">
+                            </div>
                         </div>
                         {#<div class="form-group">
                             <select class="form-control"
@@ -31,7 +35,7 @@
                                 {% endfor %}            
                             </select>
                         </div>#}
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary notika-btn-primary">
                             <span class="glyphicon glyphicon-refresh"></span>
                         </button>
                     </form>

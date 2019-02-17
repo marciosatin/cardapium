@@ -43,7 +43,7 @@ Dialog = (function () {
         const dialogModal = function () {
             let okButtonTxt = '';
             if (opt.okButtonTxt) {
-                okButtonTxt = '<button type="button" class="btn btn-primary btn-ok">' + opt.okButtonTxt + '</button>';
+                okButtonTxt = '<button type="button" class="btn btn-primary notika-btn-primary btn-ok">' + opt.okButtonTxt + '</button>';
             }
             const confirmModal =
                     $('<div class="modal fade" tabindex="-1" role="dialog">' +

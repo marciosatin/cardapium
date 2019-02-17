@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Ver ingrediente
@@ -13,11 +13,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <a href="{{ route('ingredients.edit',{'id': ingredient.id}) }}"
-                               class="btn btn-primary">
+                               class="btn btn-primary notika-btn-primary">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                             <a href="{{ route('ingredients.delete',{'id': ingredient.id}) }}"
-                               class="btn btn-danger">
+                               class="btn btn-danger notika-btn-danger">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         </div>

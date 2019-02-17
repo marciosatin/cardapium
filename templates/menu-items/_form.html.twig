@@ -1,33 +1,39 @@
 <form method="post" action="{{ action }}">
     <input class="form-control" type="hidden" name="menu_id" value="{{ menu.id }}">
     <div class="form-group">
-        <label class="control-label">Dia</label>
-        <input class="form-control" type="date" placeholder="dd/mm/yyyy"
-               name="dt_week">
+        <div class="nk-int-st">
+            <label class="control-label">Dia</label>
+            <input class="form-control" type="date" placeholder="dd/mm/yyyy"
+                   name="dt_week">
+        </div>   
     </div>   
     <div class="form-group">
-        <label class="control-label">Refeição</label>
-        <select class="form-control"
-                name="meal_id">
-            {%  for meal in meals %}
-                <option value="{{ meal.id }}">
-                    {{ meal.name }}
-                </option>
-            {% endfor %}            
-        </select>
+        <div class="nk-int-st">
+            <label class="control-label">Refeição</label>
+            <select class="form-control"
+                    name="meal_id">
+                {%  for meal in meals %}
+                    <option value="{{ meal.id }}">
+                        {{ meal.name }}
+                    </option>
+                {% endfor %}            
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Tipo de refeição</label>
-        <select class="form-control"
-                name="meal_split_id">
-            {%  for id, meal_split in meal_splits %}
-                <option value="{{ id }}">
-                    {{ meal_split }}
-                </option>
-            {% endfor %}            
-        </select>
+        <div class="nk-int-st">
+            <label class="control-label">Tipo de refeição</label>
+            <select class="form-control"
+                    name="meal_split_id">
+                {%  for id, meal_split in meal_splits %}
+                    <option value="{{ id }}">
+                        {{ meal_split }}
+                    </option>
+                {% endfor %}            
+            </select>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">
+    <button type="submit" class="btn btn-primary notika-btn-primary btn-block">
         Adicionar
         <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
     </button>

@@ -1,44 +1,52 @@
 <form method="post" action="{{ action }}">
     <input class="form-control" type="hidden" name="meal_id" value="{{ meal.id }}">
     <div class="form-group">
-        <label class="control-label">Ingrediente</label>
-        <select class="form-control"
-                name="ingredient_id">
-            {%  for ingredient in ingredients %}
-                <option value="{{ ingredient.id }}">
-                    {{ ingredient.name }}
-                </option>
-            {% endfor %}            
-        </select>
+        <div class="nk-int-st">
+            <label class="control-label">Ingrediente</label>
+            <select class="form-control"
+                    name="ingredient_id">
+                {%  for ingredient in ingredients %}
+                    <option value="{{ ingredient.id }}">
+                        {{ ingredient.name }}
+                    </option>
+                {% endfor %}            
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Estado</label>
-        <select class="form-control" value="{{ state.id }}"
-                name="state_id">
-            {%  for state in states %}
-                <option value="{{ state.id }}">
-                    {{ state.name }}
-                </option>
-            {% endfor %}            
-        </select>
+        <div class="nk-int-st">
+            <label class="control-label">Estado</label>
+            <select class="form-control" value="{{ state.id }}"
+                    name="state_id">
+                {%  for state in states %}
+                    <option value="{{ state.id }}">
+                        {{ state.name }}
+                    </option>
+                {% endfor %}            
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Tipo</label>
-        <select class="form-control"
-                name="type_id">
-            {%  for id, type in types %}
-                <option value="{{ id }}">
-                    {{ type }}
-                </option>
-            {% endfor %}            
-        </select>
+        <div class="nk-int-st">
+            <label class="control-label">Tipo</label>
+            <select class="form-control"
+                    name="type_id">
+                {%  for id, type in types %}
+                    <option value="{{ id }}">
+                        {{ type }}
+                    </option>
+                {% endfor %}            
+            </select>
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Quantidade</label>
-        <input class="form-control" type="number" step="1" min="1" placeholder="Quantidade"
-               name="quantity" value="1">
+        <div class="nk-int-st">
+            <label class="control-label">Quantidade</label>
+            <input class="form-control" type="number" step="1" min="1" placeholder="Quantidade"
+                   name="quantity" value="1">
+        </div>   
     </div>   
-    <button type="submit" class="btn btn-primary btn-block">
+    <button type="submit" class="btn btn-primary notika-btn-primary btn-block">
         Adicionar
         <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
     </button>

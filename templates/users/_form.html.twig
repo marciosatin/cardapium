@@ -1,26 +1,34 @@
 <form method="post" action="{{ action }}">
     <div class="form-group">
-        <label class="control-label">Nome</label>
-        <input class="form-control" type="text" placeholder="Nome" 
-               name="first_name" value="{{ user.first_name }}">
+        <div class="nk-int-st">
+            <label class="control-label">Nome</label>
+            <input class="form-control" type="text" placeholder="Nome" 
+                   name="first_name" value="{{ user.first_name }}">
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">Sobrenome</label>
-        <input class="form-control" type="text" placeholder="Sobrenome" 
-               name="last_name" value="{{ user.last_name }}">
+        <div class="nk-int-st">
+            <label class="control-label">Sobrenome</label>
+            <input class="form-control" type="text" placeholder="Sobrenome" 
+                   name="last_name" value="{{ user.last_name }}">
+        </div>
     </div>
     <div class="form-group">
-        <label class="control-label">E-mail</label>
-        <input class="form-control" type="text" placeholder="E-mail" 
-               name="email" value="{{ user.email }}">
+        <div class="nk-int-st">
+            <label class="control-label">E-mail</label>
+            <input class="form-control" type="text" placeholder="E-mail" 
+                   name="email" value="{{ user.email }}">
+        </div>
     </div>
     {% if user.id is null %}
-    <div class="form-group">
-        <label class="control-label">Senha</label>
-        <input class="form-control" type="password" name="password">
-    </div>
+        <div class="form-group">
+            <div class="nk-int-st">
+                <label class="control-label">Senha</label>
+                <input class="form-control" type="password" name="password">
+            </div>
+        </div>
     {% endif %}
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" class="btn btn-primary notika-btn-primary">
         <span class="glyphicon glyphicon-{{ submitIcon }}"></span>
         Salvar
     </button>

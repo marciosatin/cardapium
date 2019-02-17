@@ -3,24 +3,21 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Refeições
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="{{ route('meals.new') }}" class="btn btn-default">
+                    <div class="basic-tb-hd">
+                        <h2>Refeições</h2>
+                        <div class="menu-right">
+                            <a href="{{ route('meals.new') }}" class="btn btn-sm btn-default">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </div>
                     </div>
-                    <br/>
+                </div>
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-bordered">
+                            <table class="table table-sc-ex">
                                 <thead>
                                     <tr>
                                         <th style="width: 10px">#</th>
@@ -44,7 +41,7 @@
                                                 <a href="{{ route('meals.show', {'id': meal.id}) }}">
                                                     <span class="glyphicon glyphicon-remove"></span>
                                                 </a>#}
-                                                
+
                                             </td>
                                         </tr>
                                     {% endfor %}

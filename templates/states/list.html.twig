@@ -3,47 +3,44 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
-                    <h3 class="panel-title">
-                        Estados
-                    </h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="{{ route('states.new') }}" class="btn btn-default">
+                    <div class="basic-tb-hd">
+                        <h2>Estados</h2>
+                        <div class="menu-right">
+                            <a href="{{ route('states.new') }}" class="btn btn-sm btn-default">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </a>
                         </div>
                     </div>
-                    <br/>
+                </div>
+                <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <table class="table table-bordered">
+                            <table class="table table-sc-ex">
                                 <thead>
-                                <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Nome</th>
-                                    <th>Ações</th>
-                                </tr>
+                                    <tr>
+                                        <th style="width: 10px">#</th>
+                                        <th>Nome</th>
+                                        <th>Ações</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                {% for state in states %}
-                                    <tr>
-                                        <td>{{ state.id }}</td>
-                                        <td>{{ state.name }}</td>
-                                        <td>
-                                            <a href="{{ route('states.edit',{'id': state.id}) }}">
-                                                <span class="glyphicon glyphicon-pencil"></span>
-                                            </a>
-                                            |
-                                            <a href="{{ route('states.show',{'id': state.id}) }}">
-                                                <span class="glyphicon glyphicon-remove"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+                                    {% for state in states %}
+                                        <tr>
+                                            <td>{{ state.id }}</td>
+                                            <td>{{ state.name }}</td>
+                                            <td>
+                                                <a href="{{ route('states.edit',{'id': state.id}) }}">
+                                                    <span class="glyphicon glyphicon-pencil"></span>
+                                                </a>
+                                                |
+                                                <a href="{{ route('states.show',{'id': state.id}) }}">
+                                                    <span class="glyphicon glyphicon-remove"></span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

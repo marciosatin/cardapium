@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="panel panel-primary">
+            <div class="panel col-xs-12">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         Ver estado
@@ -12,10 +12,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <a class="btn btn-primary" href="{{ route('states.edit',{'id': state.id}) }}">
+                            <a class="btn btn-primary notika-btn-primary" href="{{ route('states.edit',{'id': state.id}) }}">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
-                            <a class="btn btn-danger" href="{{ route('states.delete',{'id': state.id}) }}">
+                            <a class="btn btn-danger notika-btn-danger" href="{{ route('states.delete',{'id': state.id}) }}">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         </div>

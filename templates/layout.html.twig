@@ -4,55 +4,323 @@
         <meta charset="UTF-8">
         <title>Cardapium</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> 
+        <link rel="stylesheet" href="/css/wave/button.css">
+        <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="/css/geral.css">
     </head>
     <body>
         {% if Auth.check() %}
-            <nav class="navbar navbar-default navbar-inverse">
+            <div class="header-top-area">
                 <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#app-navbar-collapse">
-                            <span class="sr-only">Toggle Navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-
-                        <a class="navbar-brand" href="#">
-                            Cardapium <sub>alpha</sub>
-                        </a>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{ route('users.list') }}">Usuário</a></li>
-                            <li><a href="{{ route('ingredient-types.list') }}">Tipos de ingrediente</a></li>
-                            <li><a href="{{ route('ingredients.list') }}">Ingredientes</a></li>
-                            <li><a href="{{ route('states.list') }}">Estados</a></li>
-                            <li><a href="{{ route('meals.list') }}">Refeições</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cardápios <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('menus.list') }}">Lista</a>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <div class="logo-area">
+                                <a href="#">Cardapium<sub>beta</sub></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <!--<div class="header-top-menu">
+                                <ul class="nav navbar-nav notika-top-nav">
+                                    <li class="nav-item dropdown">
+                                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-search"></i></span></a>
+                                        <div role="menu" class="dropdown-menu search-dd animated flipInX">
+                                            <div class="search-input">
+                                                <i class="notika-icon notika-left-arrow"></i>
+                                                <input type="text">
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('menu-generator.filter') }}">Gerador de cardápio</a>
+                                    <li class="nav-item dropdown">
+                                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-mail"></i></span></a>
+                                        <div role="menu" class="dropdown-menu message-dd animated zoomIn">
+                                            <div class="hd-mg-tt">
+                                                <h2>Messages</h2>
+                                            </div>
+                                            <div class="hd-message-info">
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/1.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>David Belle</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/2.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Jonathan Morris</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/4.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Fredric Mitchell</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/1.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>David Belle</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/2.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Glenn Jecobs</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="hd-mg-va">
+                                                <a href="#">View All</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item nc-al"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-alarm"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>3</span></div></a>
+                                        <div role="menu" class="dropdown-menu message-dd notification-dd animated zoomIn">
+                                            <div class="hd-mg-tt">
+                                                <h2>Notification</h2>
+                                            </div>
+                                            <div class="hd-message-info">
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/1.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>David Belle</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/2.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Jonathan Morris</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/4.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Fredric Mitchell</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/1.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>David Belle</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img">
+                                                            <img src="img/post/2.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Glenn Jecobs</h3>
+                                                            <p>Cum sociis natoque penatibus et magnis dis parturient montes</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="hd-mg-va">
+                                                <a href="#">View All</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-menus"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>2</span></div></a>
+                                        <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
+                                            <div class="hd-mg-tt">
+                                                <h2>Tasks</h2>
+                                            </div>
+                                            <div class="hd-message-info hd-task-info">
+                                                <div class="skill">
+                                                    <div class="progress">
+                                                        <div class="lead-content">
+                                                            <p>HTML5 Validation Report</p>
+                                                        </div>
+                                                        <div class="progress-bar wow fadeInLeft animated" data-progress="95%" style="width: 95%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-wow-duration="1.5s" data-wow-delay="1.2s"> <span>95%</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="lead-content">
+                                                            <p>Google Chrome Extension</p>
+                                                        </div>
+                                                        <div class="progress-bar wow fadeInLeft animated" data-progress="85%" style="width: 85%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>85%</span> </div>
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="lead-content">
+                                                            <p>Social Internet Projects</p>
+                                                        </div>
+                                                        <div class="progress-bar wow fadeInLeft animated" data-progress="75%" style="width: 75%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>75%</span> </div>
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="lead-content">
+                                                            <p>Bootstrap Admin</p>
+                                                        </div>
+                                                        <div class="progress-bar wow fadeInLeft animated" data-progress="93%" style="width: 65%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>65%</span> </div>
+                                                    </div>
+                                                    <div class="progress progress-bt">
+                                                        <div class="lead-content">
+                                                            <p>Youtube App</p>
+                                                        </div>
+                                                        <div class="progress-bar wow fadeInLeft animated" data-progress="55%" style="width: 55%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-wow-duration="1.5s" data-wow-delay="1.2s"><span>55%</span> </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="hd-mg-va">
+                                                <a href="#">View All</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
+                                        <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
+                                            <div class="hd-mg-tt">
+                                                <h2>Chat</h2>
+                                            </div>
+                                            <div class="search-people">
+                                                <i class="notika-icon notika-left-arrow"></i>
+                                                <input type="text" placeholder="Search People">
+                                            </div>
+                                            <div class="hd-message-info">
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img chat-img">
+                                                            <img src="img/post/1.jpg" alt="">
+                                                            <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>David Belle</h3>
+                                                            <p>Available</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img chat-img">
+                                                            <img src="img/post/2.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Jonathan Morris</h3>
+                                                            <p>Last seen 3 hours ago</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img chat-img">
+                                                            <img src="img/post/4.jpg" alt="">
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Fredric Mitchell</h3>
+                                                            <p>Last seen 2 minutes ago</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img chat-img">
+                                                            <img src="img/post/1.jpg" alt="">
+                                                            <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>David Belle</h3>
+                                                            <p>Available</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="#">
+                                                    <div class="hd-message-sn">
+                                                        <div class="hd-message-img chat-img">
+                                                            <img src="img/post/2.jpg" alt="">
+                                                            <div class="chat-avaible"><i class="notika-icon notika-dot"></i></div>
+                                                        </div>
+                                                        <div class="hd-mg-ctn">
+                                                            <h3>Glenn Jecobs</h3>
+                                                            <p>Available</p>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="hd-mg-va">
+                                                <a href="#">View All</a>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
-                            </li>
-                            <li><a href="{{ route('shopping-list.list') }}">Lista de compras</a></li>
-                        </ul>
-
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a>Olá {{ Auth.user().fullname }}</a></li>
-                            <li><a href="{{ route('auth.logout') }}">Logout</a></li>
-                        </ul>
+                            </div> -->
+                        </div>
                     </div>
                 </div>
-            </nav>
+            </div>
+            <div class="main-menu-area mg-tb-40">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
+                                <li><a href="{{ route('users.list') }}">Usuário</a></li>
+                                <li><a href="{{ route('ingredient-types.list') }}">Tipos de ingrediente</a></li>
+                                <li><a href="{{ route('ingredients.list') }}">Ingredientes</a></li>
+                                <li><a href="{{ route('states.list') }}">Estados</a></li>
+                                <li><a href="{{ route('meals.list') }}">Refeições</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cardápios <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{{ route('menus.list') }}">Lista</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('menu-generator.filter') }}">Gerador de cardápio</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ route('shopping-list.list') }}">Lista de compras</a></li>
+                                <li><a>Olá {{ Auth.user().fullname }}</a></li>
+                                <li><a href="{{ route('auth.logout') }}">Sair</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endif %}
     {% block content %}{% endblock %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
