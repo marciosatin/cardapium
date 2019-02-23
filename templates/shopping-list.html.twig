@@ -40,14 +40,14 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+{#                                    <th>#</th>#}
                                     <th>Nome</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for item in itens %}
                                     <tr>
-                                        <td>{{ item.id }}</td>
+{#                                        <td>{{ item.id }}</td>#}
                                         <td>{{ item.name }}</td>
                                     </tr>
                                 {% endfor %}
@@ -58,4 +58,7 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <link rel="stylesheet" href="/css/shopping-list-print.css">
 {% endblock %}

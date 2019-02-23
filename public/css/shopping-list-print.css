@@ -1,0 +1,9 @@
+@media print {
+    .header-top-area, 
+    .panel-heading,
+    .form-inline.text-center,
+    .main-menu-area.mg-tb-40 {
+        display: none;
+    }
+}
+

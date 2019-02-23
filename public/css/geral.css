@@ -33,6 +33,20 @@ ul.notika-menu-wrap li a {
 .panel-footer {
     background-color: #FFF;
 }
+
+.menu-it-icon-pro i{
+    font-size: inherit;
+    top: 0px;
+}
+
+ul.notika-menu-wrap li a {
+    font-size: inherit;
+    padding: 10px 14px;
+}
+
+table thead th:first-child, td:first-child{
+    text-align: inherit;
+}
 /**
 * Cardapio generator
 **/
