@@ -15,6 +15,15 @@ ul.notika-menu-wrap li a {
     padding: 10px 15px;
 }
 
+input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+}
+
+.panel-heading {
+    margin-top: 10px;
+}
+
 .header-top-area, .footer-copyright-area{
     background-color: #337ab7;
 }
@@ -44,26 +53,51 @@ ul.notika-menu-wrap li a {
     padding: 10px 14px;
 }
 
-table thead th:first-child, td:first-child{
-    text-align: inherit;
+table.table.table-print thead th:first-child,
+table.table.table-print tbody tr td:first-child{
+    text-align: left;
 }
+
+table.table.table-sc-ex th:first-child, td:first-child {
+    text-align: center;
+}
+
 /**
 * Cardapio generator
 **/
+.head-week-day {
+    border-top: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    background-color: #f6f8fa;
+}
+
 .head-week-day,
 .cell-week-day{
     float: left;
-    display: block;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 8px;
     width: 13.285714%;
     margin-left: 10px;
 }
 
 .cell-week-day {
-    border: 1px solid #CCC;
+    font-size: 12px;
+    border: 1px solid #DDD;
     height: 150px;
     margin-bottom: 5px;
+    box-shadow: 2px 4px 11px 0px #DDD;
+}
+
+.cell-week-day .day {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.cell-week-day .meal {
+    display: block;
+    margin-bottom: 5px;
+    font-style: italic;
 }
 
 /**
