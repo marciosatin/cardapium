@@ -1,0 +1,25 @@
+.panel.week-day {
+    border: 1px solid #DDD;
+}
+.panel.week-day .panel-heading {
+    border-bottom: 1px solid #DDD;
+    margin: 0;
+}
+.panel.week-day .panel-heading a {
+    font-size: 20px;
+    position: absolute;
+    top: 6px;
+    right: 24px;
+}
+.panel.week-day .panel-body {
+    padding: 0 15px 10px;
+}
+.panel-heading p {
+    font-size: 14px;
+    margin: 0;
+}
+.meal-split {
+    margin-top: 5px;
+}
+
+

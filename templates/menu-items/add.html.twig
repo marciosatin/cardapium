@@ -57,44 +57,77 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <br/>
                     <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-sc-ex">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <label>
-                                                <input class="checkAll" type="checkbox" name="checkAll">
-                                            </label>
-                                        </th>
-                                        <th>Refeição</th>
-                                        <th>Tipo</th>
-                                        <th>Dia</th>
-                                        <th>Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for item in items %}
-                                        <tr>
-                                            <td>
-                                                <label>
-                                                    <input type="checkbox" name="id[]" value="{{ item.id }}">
-                                                </label>
-                                            </td>
-                                            <td><a href="/meals-itens/{{ item.meal_id }}/add">{{ item.meals.name }}</a></td>
-                                            <td>{{ meal_splits[item.meal_split_id] }}</td>
-                                            <td>{{ item.dt_week | date('d/m/Y') }} - {{ item.dt_ext }}</td>
-                                            <td>
-                                                <a class="delItem" href="javascript:;" data-id="{{item.id }}">
-                                                    <span class="glyphicon glyphicon-remove"></span>
+                        {% for dt_week, itemCard in itensCard %}
+                            <div class="col-xs-12 col-lg-2">
+                                <div class="panel week-day">
+                                    <div class="panel-heading">
+                                        <p>
+                                            <strong>{{ dt_week|date('d/m')}} 
+                                                - {{ itemCard['dt_ext'] }}</strong>
+                                        </p>
+                                        <a class="minus" href="javascript:;">
+                                            <i class="fa fa-close" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                    <div class="panel-body">
+                                        {% for meal_split_id, mealsI in itemCard['itens'] %}
+                                            <div class="meal-split">
+                                                <b>{{ meal_splits[meal_split_id] }}</b>
+                                                <a class="meal-icon" href="javascript:;">
+                                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                                 </a>
-                                            </td>
-                                        </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
+                                            </div>
+                                            {% for meal in mealsI %}
+                                                <div>
+                                                    <a href="/meals-itens/{{ meal.meal_id }}/add">
+                                                        <i>{{ meal.meals.name }}</i>
+                                                    </a>
+                                                    <a class="meal-icon" href="javascript:;">
+                                                        <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            {% endfor %}
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <table class="table table-sc-ex">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <label>
+                                            <input class="checkAll" type="checkbox" name="checkAll">
+                                        </label>
+                                    </th>
+                                    <th>Refeição</th>
+                                    <th>Tipo</th>
+                                    <th>Dia</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in items %}
+                                    <tr>
+                                        <td>
+                                            <label>
+                                                <input type="checkbox" name="id[]" value="{{ item.id }}">
+                                            </label>
+                                        </td>
+                                        <td><a href="/meals-itens/{{ item.meal_id }}/add">{{ item.meals.name }}</a></td>
+                                        <td>{{ meal_splits[item.meal_split_id] }}</td>
+                                        <td>{{ item.dt_week | date('d/m/Y') }} - {{ item.dt_ext }}</td>
+                                        <td>
+                                            <a class="delItem" href="javascript:;" data-id="{{item.id }}">
+                                                <span class="glyphicon glyphicon-remove"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -102,5 +135,6 @@
     </div>
 {% endblock %}
 {% block scripts %}
+    <link rel="stylesheet" href="/css/menu-items-add.css">
     <script src="/js/menu-items/add.js"></script>
 {% endblock %}
