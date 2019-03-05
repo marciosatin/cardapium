@@ -41,31 +41,29 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
                         'item' => $menuItem
             ]);
         }, 'menu-items.show')
-        ->get('/menu-items/{id}/delete', function(ServerRequestInterface $request) use($app) {
-            $repository = $app->service('menu-item.repository');
-            $id = (int) $request->getAttribute('id');
-
-            $menuItem = $repository->findOneBy([
-                'id' => $id,
-            ]);
-
-            $menuId = $menuItem->menu_id;
-
-            $repository->delete([
-                'id' => $menuItem->id,
-            ]);
-            return $app->redirect('/menu-items/' . $menuId . '/add');
-        }, 'menu-items.delete')
         ->post('/menu-items/del', function(ServerRequestInterface $request) use($app) {
             $data = $request->getParsedBody();
             $repository = $app->service('menu-item.repository');
 
-            $ids = explode(',', $data['id']);
-
-            foreach ($ids as $id) {
-                $repository->delete([
-                    'id' => (int) $id,
-                ]);
+            try {
+                if (!isset($data['dt_week'])) {
+                    $ids = explode(',', $data['id']);
+                    foreach ($ids as $id) {
+                        $repository->delete([
+                            'id' => (int) $id,
+                        ]);
+                    }
+                } else {
+                    $itens = $repository->findByField('menu_id', $data['id'])
+                            ->where('dt_week', '=', $data['dt_week']);
+                    foreach ($itens as $item) {
+                        $repository->delete([
+                            'id' => (int) $item->id,
+                        ]);
+                    }
+                }
+            } catch (\Exception $exc) {
+                return $app->json(['response' => $exc->getMessage()]);
             }
 
             return $app->json(['response' => 'ok']);
@@ -82,7 +80,9 @@ function addMenuItems($request, $app, array $params = [])
     ]);
 
     $repositoryItem = $app->service('menu-item.repository');
-    $items = $repositoryItem->findByField('menu_id', $menu->id)->sortBy('dt_week');
+    $items = $repositoryItem->findByField('menu_id', $menu->id)
+            ->sortBy('dt_week')
+            ->sortBy('meal_split_id');
 
     $itensCard = [];
     foreach ($items as $item) {

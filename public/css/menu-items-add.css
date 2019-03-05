@@ -1,5 +1,8 @@
 .panel.week-day {
     border: 1px solid #DDD;
+    width: 14.2857%;
+    position: relative;
+    float: left;
 }
 .panel.week-day .panel-heading {
     border-bottom: 1px solid #DDD;
@@ -9,7 +12,7 @@
     font-size: 20px;
     position: absolute;
     top: 6px;
-    right: 24px;
+    right: 12px;
 }
 .panel.week-day .panel-body {
     padding: 0 15px 10px;

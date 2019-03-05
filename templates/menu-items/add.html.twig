@@ -59,14 +59,14 @@
                 <div class="panel-body">
                     <div class="row">
                         {% for dt_week, itemCard in itensCard %}
-                            <div class="col-xs-12 col-lg-2">
+{#                            <div class="col-xs-12 col-lg-2">#}
                                 <div class="panel week-day">
                                     <div class="panel-heading">
                                         <p>
                                             <strong>{{ dt_week|date('d/m')}} 
                                                 - {{ itemCard['dt_ext'] }}</strong>
                                         </p>
-                                        <a class="minus" href="javascript:;">
+                                        <a data-id="{{ menu.id }}" data-dt_week="{{ dt_week }}" class="minus" href="javascript:;">
                                             <i class="fa fa-close" aria-hidden="true"></i>
                                         </a>
                                     </div>
@@ -83,7 +83,7 @@
                                                     <a href="/meals-itens/{{ meal.meal_id }}/add">
                                                         <i>{{ meal.meals.name }}</i>
                                                     </a>
-                                                    <a class="meal-icon" href="javascript:;">
+                                                    <a data-id="{{ meal.id }}" class="meal-icon item-minus" href="javascript:;">
                                                         <i class="fa fa-minus-circle" aria-hidden="true"></i>
                                                     </a>
                                                 </div>
@@ -92,7 +92,7 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                            </div>
+{#                            </div>#}
                         {% endfor %}
                         <table class="table table-sc-ex">
                             <thead>
