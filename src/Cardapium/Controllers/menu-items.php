@@ -20,6 +20,10 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
                     'data' => $data
                 ]);
             } catch (Exception $exc) {
+                if ($request->getHeader('x-requested-with')) {
+                    return $app->json(['error' => $exc->getMessage()]);
+                }
+
                 return addMenuItens($request, $app, [
                     'data' => $data,
                     'errors' => [[
@@ -27,7 +31,9 @@ $app->get('/menu-items/{id}/add', function(ServerRequestInterface $request) use(
                         ]]
                 ]);
             }
-
+            if ($request->getHeader('x-requested-with')) {
+                return $app->json(['response' => 'ok']);
+            }
             return $app->redirect('/menu-items/' . $model->menu_id . '/add');
         }, 'menu-items.store')
         ->get('/menu-items/{id}/show', function(ServerRequestInterface $request) use($app) {
@@ -81,8 +87,8 @@ function addMenuItems($request, $app, array $params = [])
 
     $repositoryItem = $app->service('menu-item.repository');
     $items = $repositoryItem->findByField('menu_id', $menu->id)
-            ->sortBy('dt_week')
-            ->sortBy('meal_split_id');
+            ->sortBy('meal_split_id')
+            ->sortBy('dt_week');
 
     $itensCard = [];
     foreach ($items as $item) {

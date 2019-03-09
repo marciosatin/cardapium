@@ -66,6 +66,54 @@ $c.MenuItemsAdd = (function () {
 
 })();
 
+$c.MenuItemsBlockModalAdd = (function () {
+    'use strict';
+
+    return function () {
+        let menuId = null;
+        let dtWeek = null;
+        let mealSplitId = null;
+        this.init = function () {
+            initModal();
+        };
+        this.setData = function (data) {
+            menuId = data.menuId;
+            dtWeek = data.dtWeek;
+            mealSplitId = data.mealSplitId;
+        };
+        const initModal = function () {
+            $('#menuItemAddModal').modal('show');
+            $('button.btnMenuItemAdd').off().on('click', function (e) {
+                const mealId = $('#mealId').val();
+                sendData(mealId);
+            });
+        };
+        const sendData = function (mealId) {
+            let fd = new FormData();
+
+            fd.append('meal_id', mealId);
+            fd.append('menu_id', menuId);
+            fd.append('dt_week', dtWeek);
+            fd.append('meal_split_id', mealSplitId);
+            $.ajax({
+                method: 'POST',
+                url: '/menu-items/store',
+                data: fd,
+                processData: false,
+                contentType: false
+            }).done(function (data) {
+                $('#menuItemAddModal').modal('hide');
+                if (data.response) {
+                    if (data.response == 'ok') {
+                        window.location.reload();
+                    }
+                }
+                console.log(data);
+            });
+        };
+    };
+})();
+
 $c.MenuItemsBlockAdd = (function () {
     'use strict';
 
@@ -74,6 +122,23 @@ $c.MenuItemsBlockAdd = (function () {
             console.log('Block says: Hello!!');
             $('a.minus').on('click', initDelItemBlockClick);
             $('a.item-minus').on('click', initDelItemClick);
+            $('a.item-pluss').on('click', initAddItemClick);
+        };
+        const initAddItemClick = function (e) {
+            e.preventDefault();
+
+            const menuId = $(this).data('menuid');
+            const dtWeek = $(this).data('dtweek');
+            const mealSplitId = $(this).data('mealsplitid');
+
+            const modal = new $c.MenuItemsBlockModalAdd();
+            modal.init();
+            modal.setData({
+                menuId: menuId,
+                dtWeek: dtWeek,
+                mealSplitId: mealSplitId
+            });
+
         };
         const initDelItemClick = function (e) {
             e.preventDefault();
