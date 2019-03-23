@@ -87,8 +87,7 @@ function addMenuItems($request, $app, array $params = [])
 
     $repositoryItem = $app->service('menu-item.repository');
     $items = $repositoryItem->findByField('menu_id', $menu->id)
-            ->sortBy('meal_split_id')
-            ->sortBy('dt_week');
+            ->sortBy('meal_split_id');
 
     $itensCard = [];
     foreach ($items as $item) {
@@ -101,13 +100,13 @@ function addMenuItems($request, $app, array $params = [])
         }
         $itensCard[$item->dt_week]['itens'][$item->meal_split_id][] = $item;
     }
+    ksort($itensCard);
 
     return $view->render('menu-items/add.html.twig', [
                 'menu' => $menu,
                 'meals' => $repositoryI->all()->sortBy('name'),
                 'meal_splits' => MenuItem::getTypes(),
-                'items' => $items,
-                'itensCard' => $itensCard,
+                'items' => $itensCard,
                 'errors' => isset($params['errors']) ? $params['errors'] : [],
     ]);
 }

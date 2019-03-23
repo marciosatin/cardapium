@@ -3,6 +3,7 @@
     width: 14.2857%;
     position: relative;
     float: left;
+    min-height: 200px;
 }
 .panel.week-day .panel-heading {
     border-bottom: 1px solid #DDD;
@@ -12,10 +13,12 @@
     font-size: 20px;
     position: absolute;
     top: 6px;
-    right: 12px;
+    right: 10px;
 }
 .panel.week-day .panel-body {
     padding: 0 15px 10px;
+    overflow-y: scroll;
+    max-height: 300px;
 }
 .panel-heading p {
     font-size: 14px;
@@ -23,6 +26,20 @@
 }
 .meal-split {
     margin-top: 5px;
+    background: #f1f1f1;
+    padding: 0 7px;
+    float: left;
+}
+.meal-item {
+    float: left;
+}
+.meal-item .meal-item-m {
+    width: 90%;
+    float: left;
+}
+.meal-item .meal-item-i {
+    width: 10%;
+    float: right;
 }
 
 
