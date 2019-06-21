@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'default_connection' => [
+     'default_connection' => [
         'driver' => getenv('DB_DRIVER'),
-        'host' => getenv('DB_HOST'),
+        'host' => 'db',
         'database' => getenv('DB_DATABASE'),
         'username' => getenv('DB_USERNAME'),
         'password' => getenv('DB_PASSWORD'),

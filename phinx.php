@@ -25,7 +25,7 @@ return [
         'default_database' => 'default_connection',
         'default_connection' => [
             'adapter' => $default_connection['driver'],
-            'host' => $default_connection['host'],
+            'host' => '127.0.0.1:3306',
             'name' => $default_connection['database'],
             'user' => $default_connection['username'],
             'pass' => $default_connection['password'],
