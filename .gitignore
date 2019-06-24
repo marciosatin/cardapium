@@ -2,3 +2,4 @@
 .env
 .env-exemple
 .idea
+/docker/nginx/logs/cardapium.*
