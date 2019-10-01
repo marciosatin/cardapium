@@ -25,7 +25,7 @@ return [
         'default_database' => 'default_connection',
         'default_connection' => [
             'adapter' => $default_connection['driver'],
-            'host' => '127.0.0.1:3306',
+            'host' => getenv('DB_HOST_PHINX'),
             'name' => $default_connection['database'],
             'user' => $default_connection['username'],
             'pass' => $default_connection['password'],

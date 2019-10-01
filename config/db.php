@@ -3,7 +3,7 @@
 return [
      'default_connection' => [
         'driver' => getenv('DB_DRIVER'),
-        'host' => 'db',
+        'host' => getenv('DB_HOST_APP'),
         'database' => getenv('DB_DATABASE'),
         'username' => getenv('DB_USERNAME'),
         'password' => getenv('DB_PASSWORD'),
