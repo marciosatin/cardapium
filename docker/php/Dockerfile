@@ -1,4 +1,4 @@
-FROM php:7.1.15-fpm
+FROM php:7.4-fpm
 
 USER root
 
