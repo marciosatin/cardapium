@@ -3,7 +3,7 @@
 namespace Cardapium\Views;
 
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response;
+use Laminas\Diactoros\Response;
 
 class ViewRenderer implements ViewRendererInterface
 {

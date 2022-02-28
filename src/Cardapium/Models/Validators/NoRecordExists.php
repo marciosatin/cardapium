@@ -2,7 +2,7 @@
 
 namespace Cardapium\Models\Validators;
 
-use Zend\Validator\AbstractValidator;
+use Laminas\Validator\AbstractValidator;
 
 /**
  * Description of NoRecordExists
@@ -25,7 +25,7 @@ class NoRecordExists extends AbstractValidator
     public function __construct(array $options)
     {
         if (!isset($options['table']) || !isset($options['field'])) {
-            throw new \Zend\Validator\Exception\InvalidArgumentException;
+            throw new \Laminas\Validator\Exception\InvalidArgumentException;
         }
         $this->table = $options['table'];
         $this->field = $options['field'];

@@ -14,11 +14,17 @@ class MenuGeneratorRepository implements MenuGeneratorRepositoryInterface
 
     public function generate(array $params = [])
     {
-        if ($params['dtInicio'] and $params['dtFim']) {
+        if ($params['dtInicio'] && $params['dtFim']) {
 
-            $r = [];
             $meals = $this->getMeals();
-
+            if (empty($meals)) {
+                return [
+                    'headers' => [],
+                    'menu' => []
+                ];
+            }
+            
+            $r = [];
             $j = 0;
             $k = 0;
             $headers = [];
@@ -41,7 +47,7 @@ class MenuGeneratorRepository implements MenuGeneratorRepositoryInterface
                     }
                 }
 
-                $mealsRand = array_random($meals);
+                $mealsRand = array_rand($meals);
 
                 if ($k == 4) {
                     $k = 0;
@@ -49,7 +55,7 @@ class MenuGeneratorRepository implements MenuGeneratorRepositoryInterface
                 }
 
                 do {
-                    $mealsRand = array_random($meals);
+                    $mealsRand = array_rand($meals);
                     $typeId = $mealsRand['ingredient_types_id'];
                 } while (in_array($typeId, $types));
 
@@ -97,7 +103,7 @@ class MenuGeneratorRepository implements MenuGeneratorRepositoryInterface
                 ->join('meals as m', 'm.id', '=', 'meals_itens.meal_id')
                 ->join('ingredients as i', 'i.id', '=', 'meals_itens.ingredient_id')
                 ->join('ingredient_types as it', 'it.id', '=', 'i.ingredient_type_id')
-                ->where('meals_itens.type_id', 1)
+                ->where('meals_itens.type_id', MealsIten::TYPE_PRINCIPAL)
                 ->whereIn('it.id', [3, 6, 16, 17])
                 ->orderBy('it.id')
                 ->get();

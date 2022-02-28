@@ -12,13 +12,14 @@
         "robmorgan/phinx": "0.7.1",
         "xtreamwayz/pimple-container-interop": "^1.0",
         "aura/router": "3.1.0",
-        "zendframework/zend-diactoros": "1.3.10",
+        "laminas/laminas-diactoros": "2.8.0",
+        "laminas/laminas-httphandlerrunner": "2.1.0",
         "twig/twig": "~1.0",
         "illuminate/database": "6.20.26",
         "jasny/auth": "1.0.1",
         "vlucas/phpdotenv": "2.4",
-        "zendframework/zend-validator": "^2.10",
-        "zendframework/zend-filter": "^2.8"
+        "laminas/laminas-validator": "2.16.0",
+        "laminas/laminas-filter": "2.14.0"
     },
     "autoload": {
         "psr-4": {

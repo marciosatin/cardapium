@@ -6,7 +6,7 @@ use Aura\Router\RouterContainer;
 use Cardapium\ServiceContainerInterface;
 use Interop\Container\ContainerInterface;
 use Psr\Http\Message\RequestInterface;
-use Zend\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\ServerRequestFactory;
 
 class RoutePlugin implements PluginInterface
 {

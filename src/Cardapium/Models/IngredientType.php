@@ -5,9 +5,9 @@ namespace Cardapium\Models;
 use Cardapium\Models\Validators\FillableValidatorInterface;
 use Cardapium\Models\Validators\NoRecordExists;
 use Illuminate\Database\Eloquent\Model;
-use Zend\Filter\StringTrim;
-use Zend\Filter\ToNull;
-use Zend\Validator\NotEmpty;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\ToNull;
+use Laminas\Validator\NotEmpty;
 
 class IngredientType extends Model implements FillableValidatorInterface
 {

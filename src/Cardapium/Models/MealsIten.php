@@ -5,11 +5,11 @@ namespace Cardapium\Models;
 use Cardapium\Models\Validators\FillableValidatorInterface;
 use Cardapium\Models\Validators\RecordExists;
 use Illuminate\Database\Eloquent\Model;
-use Zend\Filter\ToInt;
-use Zend\Filter\ToNull;
-use Zend\Validator\GreaterThan;
-use Zend\Validator\InArray;
-use Zend\Validator\NotEmpty;
+use Laminas\Filter\ToInt;
+use Laminas\Filter\ToNull;
+use Laminas\Validator\GreaterThan;
+use Laminas\Validator\InArray;
+use Laminas\Validator\NotEmpty;
 
 class MealsIten extends Model implements FillableValidatorInterface
 {
